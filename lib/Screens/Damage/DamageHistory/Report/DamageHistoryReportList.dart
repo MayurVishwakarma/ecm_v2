@@ -1,0 +1,128 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
+import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
+import 'package:ecm_v2/Screens/Damage/DamageHistory/Report/DamageHistoryReport.dart';
+import 'package:ecm_v2/Utils/Themes/color_manager.dart';
+import 'package:ecm_v2/Widgets/CustomAppBar.dart';
+import 'package:ecm_v2/Widgets/Damage/DamageHistoryTileWidget.dart';
+import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class DamageNodeHistory extends StatefulWidget {
+  static const routeName = "/DamageNodeHistory";
+  const DamageNodeHistory({super.key});
+
+  @override
+  State<DamageNodeHistory> createState() => _DamageNodeHistoryState();
+}
+
+class _DamageNodeHistoryState extends State<DamageNodeHistory> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final dp = Provider.of<DamageProvider>(context, listen: false);
+      final ap = Provider.of<AuthProvider>(context, listen: false);
+      final source = dp.source;
+
+      dp.getDamageHistory(
+        deviceId: dp.getDeviceIdBySource(source),
+        source: source!,
+        projectId: ap.selectedProject!.id!,
+      );
+      dp.toggleTranslation(context.locale.languageCode);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ap = Provider.of<AuthProvider>(context);
+    final dp = Provider.of<DamageProvider>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: customECMAppbar(
+          context,
+          "${dp.getNodeName(dp.source!, dp.selectedNode!)} ${'History'.tr()}",
+          ap.selectedProject,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ChangeLanguage(context);
+            },
+            icon: const Icon(Icons.translate_outlined),
+          ),
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (dp.source != 'LORA')
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("${dp.selectedNode?.areaName}"),
+                      Text("${dp.selectedNode?.description}"),
+                    ],
+                  ),
+                  Divider(),
+                ],
+              ),
+            ),
+          if (dp.damageHistory != null &&
+              dp.damageHistory!.isNotEmpty &&
+              dp.isLoad == false)
+            Expanded(
+              child: SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
+                child: ListView.builder(
+                  itemCount: dp.damageHistory?.length,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  // reverse: true,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    var item = dp.damageHistory?[index];
+                    return InkWell(
+                      onTap: () {
+                        dp.updateDamageHistoryReport(item);
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          DamageHistoryReport.routeName,
+                          (route) => true,
+                        );
+                      },
+                      child: DamageHistoryTile(
+                        item: item,
+                        index: ((dp.damageHistory?.length ?? 0) - index),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          if (dp.isLoad)
+            Expanded(
+              child: Center(
+                child: CircularProgressIndicator(color: ColorManager.ecoGreen),
+              ),
+            ),
+          if (dp.damageHistory == null && dp.isLoad == false)
+            Center(
+              child: Text(
+                'No data available for this process',
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}

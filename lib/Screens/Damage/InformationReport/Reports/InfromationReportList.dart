@@ -1,0 +1,129 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
+import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
+import 'package:ecm_v2/Screens/Damage/InformationReport/Reports/InformationReport.dart';
+import 'package:ecm_v2/Utils/Themes/color_manager.dart';
+import 'package:ecm_v2/Widgets/CustomAppBar.dart';
+import 'package:ecm_v2/Widgets/Damage/InfromationHistoryTileWidget.dart';
+import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class InformationNodeHistory extends StatefulWidget {
+  static const routeName = "/InformationNodeHistory";
+  const InformationNodeHistory({super.key});
+
+  @override
+  State<InformationNodeHistory> createState() => _InformationNodeHistoryState();
+}
+
+class _InformationNodeHistoryState extends State<InformationNodeHistory> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final dp = Provider.of<DamageProvider>(context, listen: false);
+      final ap = Provider.of<AuthProvider>(context, listen: false);
+      final source = dp.source;
+
+      dp.getInformationHistory(
+        deviceId: dp.getDeviceIdBySource(source),
+        source: source!,
+        projectId: ap.selectedProject!.id!,
+        type: 'info',
+      );
+      dp.toggleTranslation(context.locale.languageCode);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ap = Provider.of<AuthProvider>(context);
+    final dp = Provider.of<DamageProvider>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: customECMAppbar(
+          context,
+          "${dp.getNodeName(dp.source!, dp.selectedNode)} ${'History'.tr()}",
+          ap.selectedProject,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ChangeLanguage(context);
+            },
+            icon: const Icon(Icons.translate_outlined),
+          ),
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (dp.source != 'LORA')
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("${dp.selectedNode?.areaName}"),
+                      Text("${dp.selectedNode?.description}"),
+                    ],
+                  ),
+                  Divider(),
+                ],
+              ),
+            ),
+          if (dp.informationHistory != null &&
+              dp.informationHistory!.isNotEmpty &&
+              dp.isLoad == false)
+            Expanded(
+              child: SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
+                child: ListView.builder(
+                  itemCount: dp.informationHistory?.length,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  // reverse: true,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    var item = dp.informationHistory?[index];
+                    return InkWell(
+                      onTap: () {
+                        dp.updateInformationHistoryReport(item);
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          InformationHistoryReport.routeName,
+                          (route) => true,
+                        );
+                      },
+                      child: InfromationHistoryTile(
+                        item: item,
+                        index: ((dp.informationHistory?.length ?? 0) - index),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          if (dp.isLoad)
+            Expanded(
+              child: Center(
+                child: CircularProgressIndicator(color: ColorManager.ecoGreen),
+              ),
+            ),
+          if (dp.informationHistory == null && dp.isLoad == false)
+            Center(
+              child: Text(
+                'No data available for this process',
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
