@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ecm_v2/Core/Models/ECMReportModel.dart';
 import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
 import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Screens/E&C/Report-History/ReportHistory.dart';
+import 'package:ecm_v2/Screens/ENC/Report-History/ReportHistory.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
 import 'package:ecm_v2/Widgets/CustomAppBar.dart';
 import 'package:ecm_v2/Widgets/E&C/EcmImagePicker.dart';

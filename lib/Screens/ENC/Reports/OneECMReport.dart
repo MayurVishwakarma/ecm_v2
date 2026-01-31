@@ -5,7 +5,7 @@ import 'package:ecm_v2/Core/Models/ECMReportModel.dart';
 import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
 import 'package:ecm_v2/Core/Providers/ConnectivityProvider.dart';
 import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Screens/E&C/Report-History/ReportHistory.dart';
+import 'package:ecm_v2/Screens/ENC/Report-History/ReportHistory.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
 import 'package:ecm_v2/Widgets/CustomAppBar.dart';
 import 'package:ecm_v2/Widgets/CustomCounter.dart';
