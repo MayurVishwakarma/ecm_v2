@@ -1,6 +1,5 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, non_constant_identifier_names, unused_catch_clause
 
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ecm_v2/Core/Models/Damage/DamageHistoryModel.dart';
@@ -179,13 +178,9 @@ Future<String?> uploadImageAndGetPath(
       // Response is a plain text path string like: /SEE...
       return response.data.toString().trim();
     } else {
-      print(
-        '❌ Upload failed with status: ${response.statusCode} - ${response.statusMessage}',
-      );
       return null;
     }
   } catch (e) {
-    print('❌ Error uploading file: $e');
     return null;
   }
 }
@@ -211,7 +206,6 @@ Future<bool> uploadDamageReport(dynamic payload) async {
       // throw Exception("API Consumed Failed");
     }
   } catch (e) {
-    print(jsonDecode(e.toString()));
     // Handle any errors that occur during the request
     throw Exception("Failed to upload ECM report");
   }
@@ -238,7 +232,6 @@ Future<bool> uploadMaterialReport(dynamic payload) async {
       // throw Exception("API Consumed Failed");
     }
   } catch (e) {
-    print(jsonDecode(e.toString()));
     // Handle any errors that occur during the request
     throw Exception("Failed to upload ECM report");
   }
@@ -264,7 +257,6 @@ Future<bool> uploadInfromationReport(dynamic payload) async {
       // throw Exception("API Consumed Failed");
     }
   } catch (e) {
-    print(jsonDecode(e.toString()));
     // Handle any errors that occur during the request
     throw Exception("Failed to upload ECM report");
   }
@@ -291,7 +283,6 @@ Future<bool> uploadRectificationReport(dynamic payload) async {
       // throw Exception("API Consumed Failed");
     }
   } catch (e) {
-    print(jsonDecode(e.toString()));
     // Handle any errors that occur during the request
     throw Exception("Failed to upload ECM report");
   }
@@ -392,7 +383,6 @@ Future<List<DamageHistoryModel>> getDamageHistoryReport({
       throw Exception('Failed to load API');
     }
   } on Exception catch (e) {
-    print(e.toString());
     throw Exception("API Consumed Failed");
   }
 }
@@ -493,7 +483,6 @@ Future<List<MaterialHistoryModel>> getMaterialHistoryReport({
       throw Exception('Failed to load API');
     }
   } on Exception catch (e) {
-    print(e.toString());
     throw Exception("API Consumed Failed");
   }
 }
@@ -596,7 +585,6 @@ Future<List<InformationHistoryModel>> getInformationHistoryReport({
       throw Exception('Failed to load API');
     }
   } on Exception catch (e) {
-    print(e.toString());
     throw Exception("API Consumed Failed");
   }
 }

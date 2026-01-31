@@ -570,7 +570,7 @@ class DamageProvider extends ChangeNotifier {
       );
       setWorkedBy(projectUserDetails.firstname);
     } catch (e) {
-      print("Error fetching project user details: $e");
+      //print("Error fetching project user details: $e");
     }
   }
 

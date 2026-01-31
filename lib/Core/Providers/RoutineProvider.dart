@@ -1,4 +1,4 @@
-// ignore_for_file: curly_braces_in_flow_control_structures, avoid_print
+// ignore_for_file: curly_braces_in_flow_control_structures, avoid_print, use_build_context_synchronously
 
 import 'dart:convert';
 
@@ -238,7 +238,7 @@ class RoutineProvider extends ChangeNotifier {
           ? setWorkedBy(projectUserDetails.firstname)
           : setApprovedBy(projectUserDetails.firstname);
     } catch (e) {
-      print("Error fetching project user details: $e");
+      //print("Error fetching project user details: $e");
     }
   }
 

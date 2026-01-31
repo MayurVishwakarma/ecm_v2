@@ -30,7 +30,7 @@ class _ProjectlistState extends State<Projectlist> {
     if (authProvider.userDetails != null) {
       authProvider.getProjectListByUserId(authProvider.userDetails!.userid);
     } else {
-      print("User details are not available");
+      //print("User details are not available");
     }
   }
 

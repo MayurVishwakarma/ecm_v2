@@ -1,11 +1,11 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, library_private_types_in_public_api
 import 'package:flutter/material.dart';
 
 class ExpandableTile extends StatefulWidget {
   Widget? title;
   Widget? body;
 
-  ExpandableTile({super.key, @required this.title, @required this.body});
+  ExpandableTile({super.key, this.title, this.body});
 
   @override
   _ExpandableTileState createState() => _ExpandableTileState();

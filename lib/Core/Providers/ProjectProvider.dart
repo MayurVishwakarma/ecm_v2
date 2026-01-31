@@ -22,7 +22,6 @@ import 'package:ecm_v2/Utils/Functions/locationProcessHelper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:path/path.dart' hide context;
 import 'package:provider/provider.dart';
 
@@ -169,7 +168,7 @@ class ProjectProvider extends ChangeNotifier {
           ? setWorkedBy(projectUserDetails.firstname)
           : setApprovedBy(projectUserDetails.firstname);
     } catch (e) {
-      print("Error fetching project user details: $e");
+      //print("Error fetching project user details: $e");
     }
   }
 
@@ -438,7 +437,6 @@ class ProjectProvider extends ChangeNotifier {
     int limit = 20,
   }) async {
     try {
-      
       var result = await getECMNodeList(
         search: search ?? '',
         projectId: projectId,

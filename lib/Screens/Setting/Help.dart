@@ -52,10 +52,10 @@ class _RaiseComplaintScreenState extends State<RaiseComplaintScreen> {
       return;
     }
 
-    print("Complaint Title: $title");
-    print("Description: $desc");
-    print("Images: ${_images.length}");
-    print("Files: ${_files.length}");
+    //print("Complaint Title: $title");
+    //print("Description: $desc");
+    //print("Images: ${_images.length}");
+    //print("Files: ${_files.length}");
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text("Complaint submitted successfully!")),

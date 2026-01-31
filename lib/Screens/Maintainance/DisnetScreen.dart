@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_typing_uninitialized_variables
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, strict_top_level_inference
 
 import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
 import 'package:ecm_v2/Screens/Maintainance/SearchBar.dart';

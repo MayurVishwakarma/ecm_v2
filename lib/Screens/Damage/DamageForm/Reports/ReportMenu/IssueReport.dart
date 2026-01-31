@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, depend_on_referenced_packages, unused_local_variable, use_build_context_synchronously, prefer_final_fields, no_leading_underscores_for_local_identifiers, deprecated_member_use
+// ignore_for_file: file_names, depend_on_referenced_packages, unused_local_variable, use_build_context_synchronously, prefer_final_fields, no_leading_underscores_for_local_identifiers, deprecated_member_use, camel_case_types
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ecm_v2/Core/Models/Damage/InfoReportMasterModel.dart';
