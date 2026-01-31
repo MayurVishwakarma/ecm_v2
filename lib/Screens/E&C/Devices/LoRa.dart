@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
 import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
