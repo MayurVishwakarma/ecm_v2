@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
 import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Screens/E&C/OfflineDevices/OfflineLORA.dart';
+import 'package:ecm_v2/Screens/ENC/OfflineDevices/OfflineLORA.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/E&C/NodeTableWidget.dart';
+import 'package:ecm_v2/Widgets/ENC/NodeTableWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

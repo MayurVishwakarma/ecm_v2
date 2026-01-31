@@ -5,7 +5,7 @@ import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
 import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
 import 'package:ecm_v2/Widgets/CustomAppBar.dart';
-import 'package:ecm_v2/Widgets/E&C/NodeTableWidgetOffline.dart';
+import 'package:ecm_v2/Widgets/ENC/NodeTableWidgetOffline.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +29,10 @@ class _OfflineOmsState extends State<OfflineOms> {
     super.initState();
   }
 
-  Future<void> getEcmNodes({required int projectId, String deviceType = 'OMS'}) async {
+  Future<void> getEcmNodes({
+    required int projectId,
+    String deviceType = 'OMS',
+  }) async {
     var result = await NodeDB.instance.fetchNodeByDeviceType(
       deviceType,
       projectId,

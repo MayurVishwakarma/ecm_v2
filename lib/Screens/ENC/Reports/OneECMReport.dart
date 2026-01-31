@@ -9,10 +9,10 @@ import 'package:ecm_v2/Screens/ENC/Report-History/ReportHistory.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
 import 'package:ecm_v2/Widgets/CustomAppBar.dart';
 import 'package:ecm_v2/Widgets/CustomCounter.dart';
-import 'package:ecm_v2/Widgets/E&C/EcmImagePicker.dart';
+import 'package:ecm_v2/Widgets/ENC/EcmImagePicker.dart';
 import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
 import 'package:ecm_v2/Widgets/POP-Ups/SubmitDialog.dart';
-import 'package:ecm_v2/Widgets/E&C/ViewPDFWidget.dart';
+import 'package:ecm_v2/Widgets/ENC/ViewPDFWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -4,7 +4,7 @@ import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
 import 'package:ecm_v2/Widgets/CustomAppBar.dart';
 import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
-import 'package:ecm_v2/Widgets/E&C/ReportHistoryWidget.dart';
+import 'package:ecm_v2/Widgets/ENC/ReportHistoryWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
