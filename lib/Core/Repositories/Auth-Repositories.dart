@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_catch_clause
 
 import 'package:dio/dio.dart';
 import 'package:ecm_v2/Core/Models/AppversionModel.dart';
@@ -33,17 +33,17 @@ Future<UserMasterModel> userLogin(String? loginId, String? password) async {
       throw Exception("Failed with status: ${response.statusCode}");
     }
   } on DioException catch (dioError) {
-    print("DioException: ${dioError.message}");
+    //print("DioException: ${dioError.message}");
     throw Exception("Network error occurred");
   } catch (e) {
-    print("Unexpected error: $e");
+    //print("Unexpected error: $e");
     throw Exception("An error occurred while logging in");
   }
 }
 
 Future<List<ProjectDetailsModel>> fetchProjectDetails(int? userId) async {
   try {
-    print(GetHttpRequest(projectPrefix, '$userId/all'));
+    //print(GetHttpRequest(projectPrefix, '$userId/all'));
     final response = await dio.get(
       GetHttpRequest(loginPrefix, 'projects/$userId/all'),
     );
@@ -57,10 +57,10 @@ Future<List<ProjectDetailsModel>> fetchProjectDetails(int? userId) async {
       throw Exception("Failed to fetch project details");
     }
   } on DioException catch (dioError) {
-    print("DioException: ${dioError.message}");
+    //print("DioException: ${dioError.message}");
     throw Exception("Network error occurred");
   } catch (e) {
-    print("Unexpected error: $e");
+    //print("Unexpected error: $e");
     throw Exception("An error occurred while fetching project details");
   }
 }
@@ -152,10 +152,10 @@ Future<ProjectUserDetailsModel> fetchProjectUserDetails({
       throw Exception("Failed to fetch project user details");
     }
   } on DioException catch (dioError) {
-    print("DioException: ${dioError.message}");
+    //print("DioException: ${dioError.message}");
     throw Exception("Network error occurred");
   } catch (e) {
-    print("Unexpected error: $e");
+    //print("Unexpected error: $e");
     throw Exception("An error occurred while fetching project user details");
   }
 }

@@ -14,7 +14,7 @@ class PreviewImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Preview Image')),
-      body: Container(child: PhotoView(imageProvider: MemoryImage(bytearray!))),
+      body: PhotoView(imageProvider: MemoryImage(bytearray!)),
     );
   }
 }

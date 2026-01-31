@@ -2,7 +2,6 @@
 
 // import 'package:ecm_v2/Core/Models/MenuModel.dart';
 import 'dart:convert';
-import 'package:ecm_v2/Core/Providers/ConnectivityProvider.dart';
 import 'package:ecm_v2/Screens/Damage/InformationReport/InformationTab.dart';
 import 'package:ecm_v2/Screens/Damage/IssueReport/IssueTab.dart';
 import 'package:ecm_v2/Screens/Damage/RectificationForm/RectificationTabBarPage.dart';
@@ -26,7 +25,6 @@ import 'package:ecm_v2/Screens/Maintainance/MaintainianceTool.dart';
 import 'package:ecm_v2/Screens/RoutineCheck/RoutineTabBarPage.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -167,10 +165,10 @@ class AuthProvider extends ChangeNotifier {
           (route) => false,
         );
       } else {
-        print("Login failed: User details are null");
+        //print("Login failed: User details are null");
       }
     } catch (e) {
-      print("Error during user login: $e");
+      //print("Error during user login: $e");
       rethrow;
     }
   }
@@ -184,7 +182,7 @@ class AuthProvider extends ChangeNotifier {
       );
       setProjectUserDetails(projectUserDetails);
     } catch (e) {
-      print("Error fetching project user details: $e");
+      //print("Error fetching project user details: $e");
       rethrow; // Propagate the error
     }
   }
@@ -195,7 +193,7 @@ class AuthProvider extends ChangeNotifier {
       updateProjectDetails(projects);
       _backupList = projects;
     } catch (e) {
-      print("Error fetching project details: $e");
+      //print("Error fetching project details: $e");
       rethrow; // Propagate the error
     }
   }
@@ -260,7 +258,10 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  getLatestVersion(BuildContext context, {bool isMain = true}) async {
+  Future<void> getLatestVersion(
+    BuildContext context, {
+    bool isMain = true,
+  }) async {
     try {
       var result = await getAppVersion('Mobile');
 
@@ -282,7 +283,7 @@ class AuthProvider extends ChangeNotifier {
         await wrongVersion(context);
       }
     } catch (e) {
-      // print("Error during version check: $e");
+      // //print("Error during version check: $e");
       await wrongVersion(context);
       throw Exception("Failed to Call API : $e");
     }
@@ -448,7 +449,7 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
