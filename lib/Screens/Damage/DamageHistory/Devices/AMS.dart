@@ -89,7 +89,7 @@ class _AmsDamageState extends State<AmsDamage> {
           area: 'all',
           distributory: 'all',
           index: 0,
-          limit: 15,
+          limit: 30,
           source: dp.source ?? 'AMS',
         )
         .whenComplete(() => dp.updateFirstLoad(false));
@@ -114,7 +114,7 @@ class _AmsDamageState extends State<AmsDamage> {
             distributory: ap.selectedDistributory?.id.toString() ?? 'all',
 
             index: dp.index,
-            limit: 15,
+            limit: 30,
             source: dp.source ?? 'AMS',
           )
           .whenComplete(() => dp.updateLoadMore(false));
@@ -184,7 +184,7 @@ class _AmsDamageState extends State<AmsDamage> {
                                   'all',
 
                               index: 0,
-                              limit: 15,
+                              limit: 30,
                               source: dp.source,
                             );
                           }
@@ -257,7 +257,7 @@ class _AmsDamageState extends State<AmsDamage> {
                                     distributory: 'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }
@@ -274,7 +274,7 @@ class _AmsDamageState extends State<AmsDamage> {
                                 isDense: true,
                               ),
                               isExpanded: true,
-                              value:
+                              initialValue:
                                   distList.any(
                                     (d) => d.id == ap.selectedDistributory?.id,
                                   )
@@ -315,7 +315,7 @@ class _AmsDamageState extends State<AmsDamage> {
                                         'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }

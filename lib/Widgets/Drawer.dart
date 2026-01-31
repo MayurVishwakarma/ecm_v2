@@ -3,7 +3,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
 import 'package:ecm_v2/Screens/Auth/ProjectList.dart';
-import 'package:ecm_v2/Screens/Setting/Help.dart';
 import 'package:ecm_v2/Screens/Setting/Profile.dart';
 import 'package:ecm_v2/Screens/Setting/Setting.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
@@ -102,6 +101,7 @@ class AppDrawer extends StatelessWidget {
                     );
                   },
                 ),
+
                 ListTile(
                   leading: const Icon(Icons.person_sharp),
                   title: Text(
@@ -133,7 +133,7 @@ class AppDrawer extends StatelessWidget {
                     ChangeLanguage(context);
                   },
                 ),
-                ListTile(
+                /*                ListTile(
                   leading: const Icon(
                     Icons.info_rounded,
                     // color: ColorManager.darkElm,
@@ -155,7 +155,7 @@ class AppDrawer extends StatelessWidget {
                     );
                   },
                 ),
-
+*/
                 ListTile(
                   leading: const Icon(
                     Icons.info_rounded,

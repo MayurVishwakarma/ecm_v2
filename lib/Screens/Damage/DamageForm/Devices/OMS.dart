@@ -59,7 +59,7 @@ class _OmsDamageState extends State<OmsDamage> {
           area: 'all',
           distributory: 'all',
           index: 0,
-          limit: 15,
+          limit: 30,
           source: dp.source ?? 'OMS',
         )
         .whenComplete(() => dp.updateFirstLoad(false));
@@ -84,7 +84,7 @@ class _OmsDamageState extends State<OmsDamage> {
             distributory: ap.selectedDistributory?.id.toString() ?? 'all',
 
             index: dp.index,
-            limit: 15,
+            limit: 30,
             source: dp.source ?? 'OMS',
           )
           .whenComplete(() => dp.updateLoadMore(false));
@@ -182,7 +182,7 @@ class _OmsDamageState extends State<OmsDamage> {
                                   'all',
 
                               index: 0,
-                              limit: 15,
+                              limit: 30,
                               source: dp.source,
                             );
                           }
@@ -255,7 +255,7 @@ class _OmsDamageState extends State<OmsDamage> {
                                     distributory: 'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }
@@ -272,7 +272,7 @@ class _OmsDamageState extends State<OmsDamage> {
                                 isDense: true,
                               ),
                               isExpanded: true,
-                              value:
+                              initialValue:
                                   distList.any(
                                     (d) => d.id == ap.selectedDistributory?.id,
                                   )
@@ -313,7 +313,7 @@ class _OmsDamageState extends State<OmsDamage> {
                                         'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }

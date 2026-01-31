@@ -6,7 +6,6 @@ import 'package:ecm_v2/Widgets/CustomAppBar.dart';
 import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
 import 'package:ecm_v2/Widgets/E&C/ReportHistoryWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ReportHistory extends StatefulWidget {

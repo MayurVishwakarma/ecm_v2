@@ -90,7 +90,7 @@ class _RmsDamageState extends State<RmsDamage> {
           area: 'all',
           distributory: 'all',
           index: 0,
-          limit: 15,
+          limit: 30,
           source: dp.source ?? 'RMS',
         )
         .whenComplete(() => dp.updateFirstLoad(false));
@@ -115,7 +115,7 @@ class _RmsDamageState extends State<RmsDamage> {
             distributory: ap.selectedDistributory?.id.toString() ?? 'all',
 
             index: dp.index,
-            limit: 15,
+            limit: 30,
             source: dp.source ?? 'RMS',
           )
           .whenComplete(() => dp.updateLoadMore(false));
@@ -184,7 +184,7 @@ class _RmsDamageState extends State<RmsDamage> {
                                   ap.selectedDistributory?.id.toString() ??
                                   'all',
                               index: 0,
-                              limit: 15,
+                              limit: 30,
                               source: dp.source,
                             );
                           }
@@ -256,7 +256,7 @@ class _RmsDamageState extends State<RmsDamage> {
                                     distributory: 'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }
@@ -314,7 +314,7 @@ class _RmsDamageState extends State<RmsDamage> {
                                         'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }

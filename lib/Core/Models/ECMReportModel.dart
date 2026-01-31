@@ -37,7 +37,7 @@ class EcmReportMasterModel {
     "isSaved": "TEXT",
     "ProjectId": "INTEGER",
   };
-  
+
   EcmReportMasterModel({
     required this.deviceId,
     required this.deviceType,
@@ -87,12 +87,12 @@ class EcmReportMasterModel {
   dynamic parameterName;
   dynamic isBullet;
   dynamic isBulletHeader;
-  int? subChakQty;
-  int? approvedStatus;
-  int? workedBy;
+  dynamic subChakQty;
+  dynamic approvedStatus;
+  dynamic workedBy;
   DateTime? workedOn;
   String? remark;
-  int? approvedBy;
+  dynamic approvedBy;
   DateTime? approvedOn;
   String? approvalRemark;
   DateTime? tempDt;
@@ -119,12 +119,12 @@ class EcmReportMasterModel {
     dynamic parameterName,
     dynamic isBullet,
     dynamic isBulletHeader,
-    int? subChakQty,
-    int? approvedStatus,
-    int? workedBy,
+    dynamic subChakQty,
+    dynamic approvedStatus,
+    dynamic workedBy,
     DateTime? workedOn,
     String? remark,
-    int? approvedBy,
+    dynamic approvedBy,
     DateTime? approvedOn,
     String? approvalRemark,
     DateTime? tempDt,

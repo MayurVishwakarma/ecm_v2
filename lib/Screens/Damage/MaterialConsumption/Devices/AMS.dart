@@ -281,7 +281,7 @@ class _AMSMaterialState extends State<AMSMaterial> {
                                 isDense: true,
                               ),
                               isExpanded: true,
-                              value:
+                              initialValue:
                                   distList.any(
                                     (d) => d.id == ap.selectedDistributory?.id,
                                   )

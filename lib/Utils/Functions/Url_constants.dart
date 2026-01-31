@@ -16,6 +16,7 @@ final String routineImagePrefix = 'routine_images/';
 final String damageApiPrefix = 'damage/';
 final String projectPrefix = 'project/';
 final String routinePrefix = 'routine/';
+final String ecmuserPrefix = 'ecm_users/';
 
 String GetHttpRequest(String ApiPrefix, String CallName) {
   var url = WebApiUrl + ApiPrefix + CallName;

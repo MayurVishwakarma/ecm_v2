@@ -281,7 +281,7 @@ class _LoRamaterialState extends State<LoRamaterial> {
                                 isDense: true,
                               ),
                               isExpanded: true,
-                              value:
+                              initialValue:
                                   distList.any(
                                     (d) => d.id == ap.selectedDistributory?.id,
                                   )

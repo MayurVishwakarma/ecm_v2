@@ -54,7 +54,7 @@ class _AmsPageState extends State<AmsPage> {
   void firstLoad() {
     final ep = Provider.of<ProjectProvider>(context, listen: false);
     final ap = Provider.of<AuthProvider>(context, listen: false);
-
+    ep.updateNodeList([]);
     ep.updateFirstLoad(true);
     ep.updateIndex(0);
     ep.updateHasNextPage(true);
@@ -69,7 +69,7 @@ class _AmsPageState extends State<AmsPage> {
           process: 'all',
           subProcess: 'all',
           index: 0,
-          limit: 15,
+          limit: 30,
           source: ep.source ?? 'AMS',
         )
         .whenComplete(() => ep.updateFirstLoad(false));
@@ -95,7 +95,7 @@ class _AmsPageState extends State<AmsPage> {
             process: ep.selectedProcess?.processId.toString() ?? 'all',
             subProcess: ep.selectedSubProcess?.subProcessId.toString() ?? 'all',
             index: ep.index,
-            limit: 15,
+            limit: 30,
             source: ep.source ?? 'AMS',
           )
           .whenComplete(() => ep.updateLoadMore(false));
@@ -166,7 +166,7 @@ class _AmsPageState extends State<AmsPage> {
                                     .toString() ??
                                 'all',
                             index: 0,
-                            limit: 15,
+                            limit: 30,
                             source: ep.source,
                           );
                         }
@@ -196,7 +196,7 @@ class _AmsPageState extends State<AmsPage> {
                               border: OutlineInputBorder(),
                               isDense: true,
                             ),
-                            value:
+                            initialValue:
                                 areaList.any(
                                   (a) => a.areaId == ap.selectedArea?.areaId,
                                 )
@@ -236,7 +236,7 @@ class _AmsPageState extends State<AmsPage> {
                                   process: 'all',
                                   subProcess: 'all',
                                   index: ep.index,
-                                  limit: 15,
+                                  limit: 30,
                                   source: ep.source,
                                 );
                               }
@@ -253,7 +253,7 @@ class _AmsPageState extends State<AmsPage> {
                               isDense: true,
                             ),
                             isExpanded: true,
-                            value:
+                            initialValue:
                                 distList.any(
                                   (d) => d.id == ap.selectedDistributory?.id,
                                 )
@@ -295,7 +295,7 @@ class _AmsPageState extends State<AmsPage> {
                                       'all',
                                   subProcess: 'all',
                                   index: ep.index,
-                                  limit: 15,
+                                  limit: 30,
                                   source: ep.source,
                                 );
                               }
@@ -323,7 +323,7 @@ class _AmsPageState extends State<AmsPage> {
                           Flexible(
                             fit: FlexFit.tight,
                             child: DropdownButtonFormField<int>(
-                              value: ep.selectedProcess?.processId,
+                              initialValue: ep.selectedProcess?.processId,
                               isExpanded: true,
                               decoration: InputDecoration(
                                 labelText: "Select Process".tr(),
@@ -366,7 +366,7 @@ class _AmsPageState extends State<AmsPage> {
                                       : value.toString(),
                                   subProcess: 'all',
                                   index: ep.index,
-                                  limit: 15,
+                                  limit: 30,
                                   source: ep.source,
                                 );
                               },
@@ -378,7 +378,8 @@ class _AmsPageState extends State<AmsPage> {
                             Flexible(
                               fit: FlexFit.tight,
                               child: DropdownButtonFormField<int>(
-                                value: ep.selectedSubProcess?.subProcessId,
+                                initialValue:
+                                    ep.selectedSubProcess?.subProcessId,
                                 isExpanded: true,
                                 decoration: InputDecoration(
                                   labelText: "Select SubProcess".tr(),
@@ -424,7 +425,7 @@ class _AmsPageState extends State<AmsPage> {
                                         ? 'all'
                                         : (value ?? 'all').toString(),
                                     index: ep.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: ep.source,
                                   );
                                 },
@@ -540,7 +541,10 @@ class _AmsPageState extends State<AmsPage> {
                           ? Center(child: CircularProgressIndicator())
                           : Column(
                               children: [
-                                NodeTableWidget(projectProvider: ep),
+                                NodeTableWidget(
+                                  projectProvider: ep,
+                                  onReturn: () => firstLoad(),
+                                ),
                                 if (ep.isLoadMoreRunning == true) Container(),
                                 if (ep.hasNextPage == false) Container(),
                                 if (ep.nodeList == null || ep.nodeList!.isEmpty)

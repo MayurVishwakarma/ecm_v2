@@ -111,7 +111,11 @@ class _OneEcmReportsState extends State<OneEcmReports> {
               ),
               if (ep.checklistModel != null &&
                   ep.checklistModel!.isNotEmpty &&
-                  ep.isLoad == false)
+                  ep.isLoad == false &&
+                  ep.checklistModel!.any(
+                    (item) =>
+                        item.processId == ep.selectedReportProcess!.processId,
+                  ))
                 Expanded(
                   child: SingleChildScrollView(
                     physics: AlwaysScrollableScrollPhysics(),
@@ -189,7 +193,9 @@ class _OneEcmReportsState extends State<OneEcmReports> {
                                         ep.isEdit(
                                           ap.isManager,
                                           ep.selectedReportProcess?.processName,
-                                          item.approvedStatus,
+                                          int.tryParse(
+                                            item.approvedStatus ?? '0',
+                                          ),
                                         ),
                                       );
                                     }).toList();
@@ -208,7 +214,9 @@ class _OneEcmReportsState extends State<OneEcmReports> {
                             isEdit: ep.isEdit(
                               ap.isManager,
                               ep.selectedReportProcess?.processName,
-                              ep.checklistModel!.first.approvedStatus,
+                              int.tryParse(
+                                ep.checklistModel!.first.approvedStatus ?? '0',
+                              ),
                             ),
                           ),
 
@@ -216,7 +224,9 @@ class _OneEcmReportsState extends State<OneEcmReports> {
                         if (ep.isSubmit(
                           ap.isManager,
                           ep.selectedReportProcess?.processName,
-                          ep.checklistModel?.first.approvedStatus,
+                          int.tryParse(
+                            ep.checklistModel?.first.approvedStatus ?? '0',
+                          ),
                         ))
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -262,7 +272,9 @@ class _OneEcmReportsState extends State<OneEcmReports> {
                         if (ep.isApproved(
                           ap.isManager,
                           ep.selectedReportProcess?.processName,
-                          ep.checklistModel?.first.approvedStatus,
+                          int.tryParse(
+                            ep.checklistModel?.first.approvedStatus ?? '0',
+                          ),
                         ))
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -386,10 +398,26 @@ class _OneEcmReportsState extends State<OneEcmReports> {
                 Center(
                   child: Text(
                     'No data available for this process',
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    style: TextStyle(fontSize: 16, color: Colors.black),
                   ),
                 ),
-
+              if (ep.checklistModel?.any(
+                        (item) =>
+                            item.processId ==
+                            ep.selectedReportProcess!.processId,
+                      ) ==
+                      false &&
+                  ep.isLoad == false)
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      '''unable to load data for this process\nplease try again letter'''
+                          .tr(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, color: Colors.black),
+                    ),
+                  ),
+                ),
               if (cp.isOnline == false)
                 Container(
                   width: double.infinity,
@@ -595,5 +623,4 @@ class _OneEcmReportsState extends State<OneEcmReports> {
       ),
     );
   }
-
 }

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ecm_v2/Core/Models/ECMReportModel.dart';
+import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
 import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
 import 'package:ecm_v2/Utils/Functions/ImagePriviewWidget.dart';
 import 'package:flutter/material.dart';
@@ -142,6 +143,7 @@ class _EcmImagePickerState extends State<EcmImagePicker> {
 
   void _previewAlert(EcmReportMasterModel model) {
     final provider = Provider.of<ProjectProvider>(context, listen: false);
+    final ap = Provider.of<AuthProvider>(context, listen: false);
     if (model.imageByteArray == null) return;
 
     showDialog(
@@ -198,22 +200,25 @@ class _EcmImagePickerState extends State<EcmImagePicker> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              provider.pickImage(
-                                ImageSource.gallery,
-                                model,
-                                context,
-                              );
-                              setState(() {});
-                            },
-                            icon: const Icon(Icons.image),
-                            label: const Text('From Gallery'),
+
+                        if (ap.selectedProject != null &&
+                            [40040, 40030].contains(ap.selectedProject?.id))
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                provider.pickImage(
+                                  ImageSource.gallery,
+                                  model,
+                                  context,
+                                );
+                                setState(() {});
+                              },
+                              icon: const Icon(Icons.image),
+                              label: const Text('From Gallery'),
+                            ),
                           ),
-                        ),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton.icon(
@@ -243,6 +248,7 @@ class _EcmImagePickerState extends State<EcmImagePicker> {
 
   void _uploadAlert(EcmReportMasterModel imageItem) {
     final provider = Provider.of<ProjectProvider>(context, listen: false);
+    final ap = Provider.of<AuthProvider>(context, listen: false);
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -251,16 +257,20 @@ class _EcmImagePickerState extends State<EcmImagePicker> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            /*ElevatedButton.icon(
-              icon: const Icon(Icons.image),
-              label: const Text('From Gallery'),
-              onPressed: () {
-                Navigator.pop(context);
-                provider.pickImage(ImageSource.gallery, imageItem, context);
-                setState(() {});
-              },
-            ),
-            */
+            if ((ap.selectedProject?.id) != null &&
+                [40040, 40030].contains(
+                  ap.selectedProject?.id,
+                )) // For specific projects only
+              ElevatedButton.icon(
+                icon: const Icon(Icons.image),
+                label: const Text('From Gallery'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  provider.pickImage(ImageSource.gallery, imageItem, context);
+                  setState(() {});
+                },
+              ),
+
             ElevatedButton.icon(
               icon: const Icon(Icons.camera),
               label: Text('Take Picture'.tr()), //From Camera

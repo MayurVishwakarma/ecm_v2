@@ -261,7 +261,7 @@ class _RmsDamageState extends State<RmsDamage> {
                                 isDense: true,
                               ),
                               isExpanded: true,
-                              value:
+                              initialValue:
                                   distList.any(
                                     (d) => d.id == ap.selectedDistributory?.id,
                                   )

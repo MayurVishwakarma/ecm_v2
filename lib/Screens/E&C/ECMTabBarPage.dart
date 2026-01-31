@@ -62,8 +62,8 @@ class _EcmToolScreenState extends State<EcmToolScreen> {
 
     await pp.getEcmStatusCount(
       projectId: int.tryParse(ap.selectedProject!.id.toString()),
-      area: (ap.selectedArea?.areaId).toString(),
-      distributory: (ap.selectedDistributory?.id).toString(),
+      area: (ap.selectedArea?.areaId ?? 'all').toString(),
+      distributory: (ap.selectedDistributory?.id ?? 'all').toString(),
       process: 'all',
       subProcess: 'all',
       source: pp.source ?? 'OMS', // <-- Use currently selected source

@@ -29,7 +29,7 @@ class _OfflineOmsState extends State<OfflineOms> {
     super.initState();
   }
 
-  getEcmNodes({required int projectId, String deviceType = 'OMS'}) async {
+  Future<void> getEcmNodes({required int projectId, String deviceType = 'OMS'}) async {
     var result = await NodeDB.instance.fetchNodeByDeviceType(
       deviceType,
       projectId,

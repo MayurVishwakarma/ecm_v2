@@ -225,7 +225,7 @@ class _OmsInformationState extends State<OmsIssue> {
                                 isDense: true,
                               ),
                               isExpanded: true,
-                              value:
+                              initialValue:
                                   distList.any(
                                     (d) => d.id == ap.selectedDistributory?.id,
                                   )

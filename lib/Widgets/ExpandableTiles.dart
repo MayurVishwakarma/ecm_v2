@@ -5,7 +5,7 @@ class ExpandableTile extends StatefulWidget {
   Widget? title;
   Widget? body;
 
-  ExpandableTile({@required this.title, @required this.body});
+  ExpandableTile({super.key, @required this.title, @required this.body});
 
   @override
   _ExpandableTileState createState() => _ExpandableTileState();

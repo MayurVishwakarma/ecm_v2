@@ -92,7 +92,7 @@ class MatrialHistoryTile extends StatelessWidget {
                     style: TextStyle(color: Colors.grey[600]),
                   ),
                   Text(
-                    "${item?.username ?? '-'}",
+                    item?.username ?? '-',
                     style: TextStyle(color: Colors.grey[600]),
                   ),
                 ],

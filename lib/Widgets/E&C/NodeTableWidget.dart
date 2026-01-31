@@ -1,14 +1,20 @@
 // ignore_for_file: file_names
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ecm_v2/Core/Models/ProcessMasterModel.dart';
 import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
 import 'package:ecm_v2/Screens/E&C/Reports/OneECMReport.dart';
 import 'package:flutter/material.dart';
 
 class NodeTableWidget extends StatelessWidget {
-  const NodeTableWidget({super.key, required this.projectProvider});
+  const NodeTableWidget({
+    super.key,
+    required this.projectProvider,
+    required this.onReturn,
+  });
 
   final ProjectProvider projectProvider;
+  final VoidCallback onReturn;
 
   Widget _buildRowCell(
     BuildContext context,
@@ -26,16 +32,18 @@ class NodeTableWidget extends StatelessWidget {
           if (allow) {
             provider.updateSelectedNode(item);
             provider.updateSelectedReportProcess(process);
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              OneEcmReports.routeName,
-              (route) => true,
-            );
+            await Navigator.pushNamed(context, OneEcmReports.routeName);
+            onReturn();
+            // Navigator.pushNamedAndRemoveUntil(
+            //   context,
+            //   OneEcmReports.routeName,
+            //   (route) => true,
+            // );
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  "Please complete previous process before going for ${process.processName?.toLowerCase()}",
+                  "${'Please complete previous process before going for '.tr()} ${process.processName?.tr().toLowerCase()}",
                 ),
                 backgroundColor: Colors.red,
                 behavior: SnackBarBehavior.floating,
@@ -74,7 +82,7 @@ class NodeTableWidget extends StatelessWidget {
     );
   }
 */
-  
+
   @override
   Widget build(BuildContext context) {
     return Padding(

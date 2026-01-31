@@ -60,7 +60,7 @@ class _OfflineOmsState extends State<OfflineDamageOms> {
     });
   }
 
-  getDamageNodes({required int projectId, String deviceType = 'OMS'}) async {
+  Future<void> getDamageNodes({required int projectId, String deviceType = 'OMS'}) async {
     var result = await DamageNodeDB.instance.fetchNodeByDeviceType(
       deviceType,
       projectId,

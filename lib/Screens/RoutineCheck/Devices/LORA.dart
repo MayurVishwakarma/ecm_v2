@@ -85,7 +85,7 @@ class _LoRaRoutineState extends State<LoRaRoutine> {
           area: 'all',
           distributory: 'all',
           index: 0,
-          limit: 15,
+          limit: 30,
           source: dp.source ?? 'LORA',
         )
         .whenComplete(() => dp.updateFirstLoad(false));
@@ -110,7 +110,7 @@ class _LoRaRoutineState extends State<LoRaRoutine> {
             distributory: ap.selectedDistributory?.id.toString() ?? 'all',
 
             index: dp.index,
-            limit: 15,
+            limit: 30,
             source: dp.source ?? 'LORA',
           )
           .whenComplete(() => dp.updateLoadMore(false));
@@ -179,7 +179,7 @@ class _LoRaRoutineState extends State<LoRaRoutine> {
                                   ap.selectedDistributory?.id.toString() ??
                                   'all',
                               index: 0,
-                              limit: 15,
+                              limit: 30,
                               source: dp.source,
                             );
                           }
@@ -251,7 +251,7 @@ class _LoRaRoutineState extends State<LoRaRoutine> {
                                     distributory: 'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }
@@ -309,7 +309,7 @@ class _LoRaRoutineState extends State<LoRaRoutine> {
                                         'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }

@@ -86,7 +86,7 @@ class _RmsRoutineState extends State<RmsRoutine> {
           area: 'all',
           distributory: 'all',
           index: 0,
-          limit: 15,
+          limit: 30,
           source: dp.source ?? 'RMS',
         )
         .whenComplete(() => dp.updateFirstLoad(false));
@@ -111,7 +111,7 @@ class _RmsRoutineState extends State<RmsRoutine> {
             distributory: ap.selectedDistributory?.id.toString() ?? 'all',
 
             index: dp.index,
-            limit: 15,
+            limit: 30,
             source: dp.source ?? 'RMS',
           )
           .whenComplete(() => dp.updateLoadMore(false));
@@ -180,7 +180,7 @@ class _RmsRoutineState extends State<RmsRoutine> {
                                   ap.selectedDistributory?.id.toString() ??
                                   'all',
                               index: 0,
-                              limit: 15,
+                              limit: 30,
                               source: dp.source,
                             );
                           }
@@ -252,7 +252,7 @@ class _RmsRoutineState extends State<RmsRoutine> {
                                     distributory: 'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }
@@ -310,7 +310,7 @@ class _RmsRoutineState extends State<RmsRoutine> {
                                         'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }

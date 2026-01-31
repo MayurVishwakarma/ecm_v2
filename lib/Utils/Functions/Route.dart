@@ -113,6 +113,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => const RectificationReport(),
         );
+
       default:
         return _errorRoute();
     }

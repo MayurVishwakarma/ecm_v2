@@ -26,7 +26,7 @@ class _OfflineLoRaState extends State<OfflineLoRa> {
     super.initState();
   }
 
-  getEcmNodes({required int projectId, String deviceType = 'LORA'}) async {
+  Future<void> getEcmNodes({required int projectId, String deviceType = 'LORA'}) async {
     var result = await NodeDB.instance.fetchNodeByDeviceType(
       deviceType,
       projectId,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-getErrorPopUp(BuildContext context) async {
+Future<Future<dynamic>> getErrorPopUp(BuildContext context) async {
   return showDialog(
     context: context,
     builder: (BuildContext context) {

@@ -89,7 +89,7 @@ class _LoRaDamageState extends State<LoRaDamage> {
           area: 'all',
           distributory: 'all',
           index: 0,
-          limit: 15,
+          limit: 30,
           source: dp.source ?? 'LORA',
         )
         .whenComplete(() => dp.updateFirstLoad(false));
@@ -114,7 +114,7 @@ class _LoRaDamageState extends State<LoRaDamage> {
             distributory: ap.selectedDistributory?.id.toString() ?? 'all',
 
             index: dp.index,
-            limit: 15,
+            limit: 30,
             source: dp.source ?? 'LORA',
           )
           .whenComplete(() => dp.updateLoadMore(false));
@@ -183,7 +183,7 @@ class _LoRaDamageState extends State<LoRaDamage> {
                                   ap.selectedDistributory?.id.toString() ??
                                   'all',
                               index: 0,
-                              limit: 15,
+                              limit: 30,
                               source: dp.source,
                             );
                           }
@@ -255,7 +255,7 @@ class _LoRaDamageState extends State<LoRaDamage> {
                                     distributory: 'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }
@@ -313,7 +313,7 @@ class _LoRaDamageState extends State<LoRaDamage> {
                                         'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ecm_v2/Core/Database/DBHelper.dart';
 import 'package:ecm_v2/Core/Models/ReportHistoryModel.dart';
 import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
@@ -434,9 +435,10 @@ class ProjectProvider extends ChangeNotifier {
     String? subProcess,
     String? distributory,
     int index = 0,
-    int limit = 10,
+    int limit = 20,
   }) async {
     try {
+      
       var result = await getECMNodeList(
         search: search ?? '',
         projectId: projectId,
@@ -479,11 +481,11 @@ class ProjectProvider extends ChangeNotifier {
           result.map((e) async {
             e.description = await TranslationHelper.translate(
               e.description ?? '',
-              langCode!,
+              langCode ?? 'en',
             );
             e.subProcessName = await TranslationHelper.translate(
               e.subProcessName ?? '',
-              langCode,
+              langCode ?? 'en',
             );
             return e;
           }),
@@ -519,7 +521,7 @@ class ProjectProvider extends ChangeNotifier {
     String? endDate,
     String? source,
     int index = 0,
-    int limit = 15,
+    int limit = 20,
   }) async {
     try {
       var result = await getEcmReportHistory(
@@ -720,7 +722,7 @@ class ProjectProvider extends ChangeNotifier {
                     Center(
                       child: FittedBox(
                         child: Text(
-                          text,
+                          text.tr(),
                           style: const TextStyle(
                             fontSize: 10, // 🔥 readable size
                             fontWeight: FontWeight.w500,
@@ -735,7 +737,7 @@ class ProjectProvider extends ChangeNotifier {
               : Center(
                   child: FittedBox(
                     child: Text(
-                      text,
+                      text.tr(),
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
@@ -753,7 +755,8 @@ class ProjectProvider extends ChangeNotifier {
         if (proStatus == 2) return buildBox(Colors.green, "Approved");
         if (proStatus == 3) return buildBox(Colors.orange, "Commented");
         return buildBox(Colors.red, "Pending");
-      } else if (pro.toLowerCase().contains('dry comm')) {
+      } else if (pro.toLowerCase().contains('dry comm') ||
+          pro.toLowerCase().contains('wet comm')) {
         if (proStatus == 1) return buildBox(Colors.blue.shade900, "Completed");
         if (proStatus == 2) return buildBox(Colors.green, "Approved");
         if (proStatus == 3) return buildBox(Colors.orange, "Commented");
@@ -938,6 +941,7 @@ class ProjectProvider extends ChangeNotifier {
             (item.value == null || item.value!.isEmpty) &&
             item.inputType != "image" &&
             item.inputType != "pdf" &&
+            item.inputType != "text" &&
             item.inputType!.isNotEmpty,
       );
 

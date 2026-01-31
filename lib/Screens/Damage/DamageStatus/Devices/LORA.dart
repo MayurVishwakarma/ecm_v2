@@ -273,7 +273,7 @@ class _LoRaDamageState extends State<LoRaDamage> {
                                 isDense: true,
                               ),
                               isExpanded: true,
-                              value:
+                              initialValue:
                                   distList.any(
                                     (d) => d.id == ap.selectedDistributory?.id,
                                   )

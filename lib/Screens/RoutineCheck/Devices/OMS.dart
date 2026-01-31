@@ -66,7 +66,7 @@ class _OmsRoutineState extends State<OmsRoutine> {
           routineStatus: 3,
           nextSchedule: 0,
           index: 0,
-          limit: 15,
+          limit: 30,
           source: rp.source ?? 'OMS',
         )
         .whenComplete(() => rp.updateFirstLoad(false));
@@ -92,7 +92,7 @@ class _OmsRoutineState extends State<OmsRoutine> {
             routineStatus: rp.selectedStatus?.id ?? 3,
             nextSchedule: rp.selecltedSchedule?.id ?? 0,
             index: rp.index,
-            limit: 15,
+            limit: 30,
             source: rp.source ?? 'OMS',
           )
           .whenComplete(() => rp.updateLoadMore(false));
@@ -170,7 +170,7 @@ class _OmsRoutineState extends State<OmsRoutine> {
                               routineStatus: rp.selectedStatus?.id ?? 3,
                               nextSchedule: rp.selecltedSchedule?.id ?? 0,
                               index: rp.index,
-                              limit: 15,
+                              limit: 30,
                               source: rp.source,
                             );
                           }
@@ -248,7 +248,7 @@ class _OmsRoutineState extends State<OmsRoutine> {
                                     nextSchedule: rp.selecltedSchedule?.id ?? 0,
 
                                     index: rp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: rp.source,
                                   );
                                 }
@@ -307,7 +307,7 @@ class _OmsRoutineState extends State<OmsRoutine> {
                                     nextSchedule: rp.selecltedSchedule?.id ?? 0,
 
                                     index: rp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: rp.source,
                                   );
                                 }
@@ -381,7 +381,7 @@ class _OmsRoutineState extends State<OmsRoutine> {
                                     nextSchedule: rp.selecltedSchedule?.id ?? 0,
 
                                     index: rp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: rp.source,
                                   );
                                 }
@@ -441,7 +441,7 @@ class _OmsRoutineState extends State<OmsRoutine> {
                                     nextSchedule: value,
 
                                     index: rp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: rp.source,
                                   );
                                 }

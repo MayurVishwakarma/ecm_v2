@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ecm_v2/Core/Models/Damage/DamageHistoryModel.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class DamageHistoryTile extends StatelessWidget {
   const DamageHistoryTile({super.key, required this.item, required this.index});

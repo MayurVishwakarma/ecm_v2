@@ -35,7 +35,7 @@ Future<List<DamageNodeModel>?> getDamageStatusList({
   String? area = 'all',
   String? distributory = 'all',
   required int? index,
-  int? limit = 15,
+  int? limit = 20,
   required String? source,
   required int? projectId,
 }) async {
@@ -606,7 +606,7 @@ Future<List<RectificationNodeModel>?> getRectificationNodeList({
   String? area = 'all',
   String? distributory = 'all',
   required int? index,
-  int? limit = 15,
+  int? limit = 20,
   required String? source,
   required int? projectId,
 }) async {

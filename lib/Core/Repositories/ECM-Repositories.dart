@@ -170,7 +170,7 @@ Future<List<EcmNodeListMasterModel>> getECMNodeList({
   String? process = 'all',
   String? subProcess = 'all',
   required int? index,
-  int? limit = 15,
+  int? limit = 20,
   required String? source,
   required int? projectId,
 }) async {
@@ -198,7 +198,9 @@ Future<List<EcmNodeListMasterModel>> getECMNodeList({
     if (response.statusCode == 200) {
       List<EcmNodeListMasterModel> result = [];
       response.data['data']['Response'].forEach((v) {
-        result.add(EcmNodeListMasterModel.fromJson(v));
+        result.add(
+          EcmNodeListMasterModel.fromJson(v).copyWith(projectId: projectId),
+        );
       });
       return result;
     } else {
@@ -232,9 +234,11 @@ Future<List<EcmReportMasterModel>> getECMReportByProcessId({
       });
       return result;
     } else {
+      print("Error: ${response.statusCode} - ${response.statusMessage}");
       throw Exception('Failed to load API');
     }
   } catch (e) {
+    print("Error in getECMReportByProcessId: $e");
     throw Exception('Failed to load API');
   }
 }
@@ -244,7 +248,7 @@ Future<List<ReportHistoryModel>> getEcmReportHistory({
   String? startDate = '',
   String? endDate = '',
   required int? index,
-  int? limit = 15,
+  int? limit = 20,
   required String? source,
   required int? projectId,
 }) async {
@@ -322,8 +326,9 @@ Future<bool> uploadECMReport(dynamic payload) async {
       var json = response.data;
       if (json["Status"] == "Ok") {
         return true;
-      } else
-        throw new Exception();
+      } else {
+        throw Exception();
+      }
     } else {
       return false;
     }
@@ -345,8 +350,9 @@ Future<bool> changeApproveStatus(dynamic payload) async {
       var json = response.data;
       if (json["Status"] == "Ok") {
         return true;
-      } else
-        throw new Exception();
+      } else {
+        throw Exception();
+      }
     } else {
       return false;
     }

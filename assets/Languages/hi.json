@@ -152,5 +152,8 @@
   "Site Survey Count": "साइट सर्वेक्षण गिनती",
   "You are offline. Some functionalities may be limited.": "आप ऑफ़लाइन हैं। कुछ कार्यक्षमता सीमित हो सकती है।",
   "No internet connection": "कोई इंटरनेट कनेक्शन नहीं",
-  "Are you sure you want to delete this report?": "क्या आप वास्तव में इस रिपोर्ट को हटाना चाहते हैं?"
+  "Are you sure you want to delete this report?": "क्या आप वास्तव में इस रिपोर्ट को हटाना चाहते हैं?",
+  "Adminstrator": "प्रशासक",
+  "unable to load data for this process\nplease try again letter": "इस प्रक्रिया के लिए डेटा लोड करने में असमर्थ\nकृपया बाद में पुनः प्रयास करें",
+  "Please complete previous process before going for ": "जाने से पहले पिछली प्रक्रिया पूरी करें "
 }

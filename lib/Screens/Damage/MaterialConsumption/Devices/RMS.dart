@@ -281,7 +281,7 @@ class _RmsMaterialState extends State<RmsMaterial> {
                                 isDense: true,
                               ),
                               isExpanded: true,
-                              value:
+                              initialValue:
                                   distList.any(
                                     (d) => d.id == ap.selectedDistributory?.id,
                                   )

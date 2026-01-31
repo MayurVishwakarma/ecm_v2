@@ -6,7 +6,7 @@ import 'package:photo_view/photo_view.dart';
 
 class PreviewImageWidget extends StatelessWidget {
   Uint8List? bytearray;
-  PreviewImageWidget(this.bytearray) {
+  PreviewImageWidget(this.bytearray, {super.key}) {
     super.key;
   }
 

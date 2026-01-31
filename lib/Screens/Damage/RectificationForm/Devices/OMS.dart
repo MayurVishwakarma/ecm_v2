@@ -59,7 +59,7 @@ class _OmsRectificationState extends State<OmsRectification> {
           area: 'all',
           distributory: 'all',
           index: 0,
-          limit: 15,
+          limit: 30,
           source: dp.source ?? 'OMS',
         )
         .whenComplete(() => dp.updateFirstLoad(false));
@@ -84,7 +84,7 @@ class _OmsRectificationState extends State<OmsRectification> {
             distributory: ap.selectedDistributory?.id.toString() ?? 'all',
 
             index: dp.index,
-            limit: 15,
+            limit: 30,
             source: dp.source ?? 'OMS',
           )
           .whenComplete(() => dp.updateLoadMore(false));
@@ -170,7 +170,7 @@ class _OmsRectificationState extends State<OmsRectification> {
                                   'all',
 
                               index: 0,
-                              limit: 15,
+                              limit: 30,
                               source: dp.source,
                             );
                           }
@@ -243,7 +243,7 @@ class _OmsRectificationState extends State<OmsRectification> {
                                     distributory: 'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }
@@ -260,7 +260,7 @@ class _OmsRectificationState extends State<OmsRectification> {
                                 isDense: true,
                               ),
                               isExpanded: true,
-                              value:
+                              initialValue:
                                   distList.any(
                                     (d) => d.id == ap.selectedDistributory?.id,
                                   )
@@ -301,7 +301,7 @@ class _OmsRectificationState extends State<OmsRectification> {
                                         'all',
 
                                     index: dp.index,
-                                    limit: 15,
+                                    limit: 30,
                                     source: dp.source,
                                   );
                                 }

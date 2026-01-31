@@ -26,7 +26,7 @@ class _OfflineRmsState extends State<OfflineRms> {
     super.initState();
   }
 
-  getEcmNodes({required int projectId, String deviceType = 'RMS'}) async {
+  Future<void> getEcmNodes({required int projectId, String deviceType = 'RMS'}) async {
     var result = await NodeDB.instance.fetchNodeByDeviceType(
       deviceType,
       projectId,

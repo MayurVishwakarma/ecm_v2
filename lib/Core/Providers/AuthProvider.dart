@@ -33,7 +33,7 @@ import 'package:url_launcher/url_launcher.dart';
 enum Keys { user }
 
 class AuthProvider extends ChangeNotifier {
-  final String versionNO = 'v0.1.1';
+  final String versionNO = 'v0.1.8';
   UserMasterModel? _userDetails;
   ProjectUserDetailsModel? _projectUserDetails;
   List<ProjectDetailsModel>? _projectDetails;
@@ -70,6 +70,12 @@ class AuthProvider extends ChangeNotifier {
       SurveyToolScreen(),
     ),*/
     MenuItem('Maintenance', 'assets/images/maintenance.png', MaintenanceTool()),
+    // MenuItem(
+    //   'Production Overview',
+    //   'assets/images/material-box.png',
+    //   // ProductionToolScreen(),
+    //   ProductionOverview(),
+    // ),
   ];
 
   final List<MenuItem> damagetabs = [
@@ -190,7 +196,7 @@ class AuthProvider extends ChangeNotifier {
       _backupList = projects;
     } catch (e) {
       print("Error fetching project details: $e");
-      throw e; // Propagate the error
+      rethrow; // Propagate the error
     }
   }
 
@@ -254,18 +260,8 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> getLatestVersion(
-    BuildContext context, {
-    bool isMain = true,
-  }) async {
+  getLatestVersion(BuildContext context, {bool isMain = true}) async {
     try {
-      final cp = Provider.of<ConnectivityProvider>(context);
-      if (!cp.isOnline) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('No internet connection')));
-        return;
-      }
       var result = await getAppVersion('Mobile');
 
       if (result?.version == versionNO) {
@@ -283,10 +279,11 @@ class AuthProvider extends ChangeNotifier {
           );
         }
       } else {
-        wrongVersion(context);
+        await wrongVersion(context);
       }
     } catch (e) {
-      wrongVersion(context);
+      // print("Error during version check: $e");
+      await wrongVersion(context);
       throw Exception("Failed to Call API : $e");
     }
   }

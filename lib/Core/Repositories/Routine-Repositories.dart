@@ -28,7 +28,7 @@ Future<List<RoutineListMasterModel>?> getRoutineNodes({
   String? endDate = '1900-01-01',
   int? nextSchedule = 0,
   required int? index,
-  int? limit = 15,
+  int? limit = 20,
   required String? source,
   required int? projectId,
 }) async {
@@ -132,8 +132,9 @@ Future<bool> uploadRoutineReport(dynamic payload) async {
       var json = response.data;
       if (json["Status"] == "Ok") {
         return true;
-      } else
-        throw new Exception();
+      } else {
+        throw Exception();
+      }
     } else {
       return false;
       // throw Exception("API Consumed Failed");
