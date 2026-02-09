@@ -4,13 +4,14 @@ import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
 import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
 import 'package:ecm_v2/Utils/Themes/color_manager.dart';
 import 'package:ecm_v2/Widgets/CustomAppBar.dart';
-import 'package:ecm_v2/Widgets/ENC/NodeTableWidgetOffline.dart';
+import '../../../Widgets/ENC/NodeTableWidgetOffline.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class OfflineLoRa extends StatefulWidget {
   static const String routeName = '/offlineLoRa';
   const OfflineLoRa({super.key});
+
 
   @override
   State<OfflineLoRa> createState() => _OfflineLoRaState();
