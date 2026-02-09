@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
-import 'package:ecm_v2/Core/Models/ECMReportModel.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
+import '../../../Core/Models/ECMReportModel.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';

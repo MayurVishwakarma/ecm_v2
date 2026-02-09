@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, must_be_immutable, camel_case_types, use_key_in_widget_constructors, avoid_unnecessary_containers, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, file_names, non_constant_identifier_names
 
-import 'package:ecm_v2/Core/Models/Comman/HOSupportTeam.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Widgets/CustomAppBar.dart';
+import '../../../Core/Models/Comman/HOSupportTeam.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

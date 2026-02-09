@@ -1,8 +1,8 @@
 // ignore_for_file: unused_local_variable, file_names, non_constant_identifier_names, depend_on_referenced_packages, avoid_print
 
-import 'package:ecm_v2/Core/Models/ECMReportModel.dart';
-import 'package:ecm_v2/Core/Models/EcmNodeMasterModel.dart';
-import 'package:ecm_v2/Core/Models/ProcessMasterModel.dart';
+import '../../../Core/Models/ECMReportModel.dart';
+import '../../../Core/Models/EcmNodeMasterModel.dart';
+import '../../../Core/Models/ProcessMasterModel.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -745,6 +745,4 @@ class NodeDB {
     final db = await database;
     await db.delete(EcmNodeListMasterModel.tableName);
   }
-
-
 }

@@ -1,8 +1,8 @@
 // ignore_for_file: file_names, unused_local_variable, use_build_context_synchronously
 
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ConnectivityProvider.dart';
-import 'package:ecm_v2/Widgets/Drawer.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ConnectivityProvider.dart';
+import '../../../Widgets/Drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';

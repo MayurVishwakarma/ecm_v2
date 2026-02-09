@@ -1,5 +1,5 @@
-import 'package:ecm_v2/Core/Models/Comman/DisnetModel.dart';
-import 'package:ecm_v2/Screens/Maintainance/Self_Diagnostic_Onsite.dart';
+import '../../../Core/Models/Comman/DisnetModel.dart';
+import '../../../Screens/Maintainance/Self_Diagnostic_Onsite.dart';
 import 'package:flutter/material.dart';
 
 class ItemSearchDelegate extends SearchDelegate<String> {

@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/RoutineProvider.dart';
-import 'package:ecm_v2/Screens/RoutineCheck/Devices/AMS.dart';
-import 'package:ecm_v2/Screens/RoutineCheck/Devices/LORA.dart';
-import 'package:ecm_v2/Screens/RoutineCheck/Devices/OMS.dart';
-import 'package:ecm_v2/Screens/RoutineCheck/Devices/RMS.dart';
-import 'package:ecm_v2/Widgets/CustomAppBar.dart';
-import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/RoutineProvider.dart';
+import '../../../Screens/RoutineCheck/Devices/AMS.dart';
+import '../../../Screens/RoutineCheck/Devices/LORA.dart';
+import '../../../Screens/RoutineCheck/Devices/OMS.dart';
+import '../../../Screens/RoutineCheck/Devices/RMS.dart';
+import '../../../Widgets/CustomAppBar.dart';
+import '../../../Widgets/POP-Ups/ChangeLanguage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

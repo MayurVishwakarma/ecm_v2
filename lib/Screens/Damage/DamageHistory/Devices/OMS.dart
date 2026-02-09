@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
-import 'package:ecm_v2/Screens/Damage/DamageHistory/Report/DamageHistoryReportList.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-// import 'package:ecm_v2/Widgets/Damage/NodeTableWidget.dart';
-import 'package:ecm_v2/Widgets/TableRowBuilder.dart';
+import '../../../../Core/Providers/AuthProvider.dart';
+import '../../../../Core/Providers/DamageProvider.dart';
+import '../../../../Screens/Damage/DamageHistory/Report/DamageHistoryReportList.dart';
+import '../../../../Utils/Themes/color_manager.dart';
+// import '../../../../Widgets/Damage/NodeTableWidget.dart';
+import '../../../../Widgets/TableRowBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

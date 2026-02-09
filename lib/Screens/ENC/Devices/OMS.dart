@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_print
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Screens/ENC/OfflineDevices/OfflineOMS.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/ENC/NodeTableWidget.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../../../Screens/ENC/OfflineDevices/OfflineOMS.dart';
+import '../../../Utils/Themes/color_manager.dart';
+import '../../../Widgets/ENC/NodeTableWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

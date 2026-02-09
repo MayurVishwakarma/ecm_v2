@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/MenuModel.dart';
+import '../../../Core/Models/MenuModel.dart';
 import 'package:flutter/material.dart';
 
 class MenuTileWidget extends StatelessWidget {

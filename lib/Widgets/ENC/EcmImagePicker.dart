@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/ECMReportModel.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Utils/Functions/ImagePriviewWidget.dart';
+import '../../../Core/Models/ECMReportModel.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../../../Utils/Functions/ImagePriviewWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';

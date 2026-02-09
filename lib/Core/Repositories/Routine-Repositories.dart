@@ -3,9 +3,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:ecm_v2/Core/Models/Routine/RoutineListMasterModel.dart';
-import 'package:ecm_v2/Core/Models/Routine/RoutineReportModel.dart';
-import 'package:ecm_v2/Utils/Functions/Url_constants.dart';
+import '../../../Core/Models/Routine/RoutineListMasterModel.dart';
+import '../../../Core/Models/Routine/RoutineReportModel.dart';
+import '../../../Utils/Functions/Url_constants.dart';
 import 'package:flutter/material.dart';
 
 final dio = Dio(

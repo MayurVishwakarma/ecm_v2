@@ -1,13 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ConnectivityProvider.dart';
-import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Core/Providers/RoutineProvider.dart';
-import 'package:ecm_v2/Utils/Functions/Route.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ConnectivityProvider.dart';
+import '../../../Core/Providers/DamageProvider.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../../../Core/Providers/RoutineProvider.dart';
+import '../../../Utils/Functions/Route.dart';
 import 'package:provider/provider.dart';
-import 'package:ecm_v2/Utils/Themes/theme_manager.dart';
+import '../../../Utils/Themes/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:permission_handler/permission_handler.dart';

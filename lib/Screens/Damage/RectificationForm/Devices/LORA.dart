@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/Damage/NodeTableWidget.dart';
+import '../../../../../Core/Providers/AuthProvider.dart';
+import '../../../../../Core/Providers/DamageProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../../Utils/Themes/color_manager.dart';
+import '../../../../../Widgets/Damage/NodeTableWidget.dart';
 
 class LoRaDamage extends StatefulWidget {
   const LoRaDamage({super.key});

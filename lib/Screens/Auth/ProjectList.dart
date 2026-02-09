@@ -1,13 +1,13 @@
 // ignore_for_file: avoid_print
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ConnectivityProvider.dart';
-import 'package:ecm_v2/Widgets/CustomAppBar.dart';
-import 'package:ecm_v2/Widgets/Drawer.dart';
-import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
-import 'package:ecm_v2/Widgets/ProjectDetailsWidget.dart';
-import 'package:ecm_v2/Widgets/nointernet.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ConnectivityProvider.dart';
+import '../../../Widgets/CustomAppBar.dart';
+import '../../../Widgets/Drawer.dart';
+import '../../../Widgets/POP-Ups/ChangeLanguage.dart';
+import '../../../Widgets/ProjectDetailsWidget.dart';
+import '../../../Widgets/nointernet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

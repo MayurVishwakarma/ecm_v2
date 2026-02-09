@@ -1,17 +1,17 @@
 // ignore_for_file: file_names, use_build_context_synchronously, deprecated_member_use
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/ECMReportModel.dart';
-import 'package:ecm_v2/Core/Models/ProcessMasterModel.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/CustomCounter.dart';
-import 'package:ecm_v2/Widgets/ENC/EcmImagePicker.dart';
-import 'package:ecm_v2/Widgets/POP-Ups/SubmitDialog.dart';
-import 'package:ecm_v2/Widgets/ENC/ViewPDFWidget.dart';
+import '../../../Core/Models/ECMReportModel.dart';
+import '../../../Core/Models/ProcessMasterModel.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../../../Utils/Themes/color_manager.dart';
+import '../../../Widgets/CustomCounter.dart';
+import '../../../Widgets/ENC/EcmImagePicker.dart';
+import '../../../Widgets/POP-Ups/SubmitDialog.dart';
+import '../../../Widgets/ENC/ViewPDFWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:ecm_v2/Core/Database/DBHelper.dart';
+import '../../../Core/Database/DBHelper.dart';
 import 'package:provider/provider.dart';
 
 class OfflineECMReport extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/CustomAppBar.dart';
-import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
-import 'package:ecm_v2/Widgets/ENC/ReportHistoryWidget.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../../../Utils/Themes/color_manager.dart';
+import '../../../Widgets/CustomAppBar.dart';
+import '../../../Widgets/POP-Ups/ChangeLanguage.dart';
+import '../../../Widgets/ENC/ReportHistoryWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

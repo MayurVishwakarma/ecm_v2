@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, deprecated_member_use
 
-import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
-import 'package:ecm_v2/Screens/Damage/DamageForm/Reports/DamageManager.dart';
+import '../../../Core/Providers/DamageProvider.dart';
+import '../../../Screens/Damage/DamageForm/Reports/DamageManager.dart';
 import 'package:flutter/material.dart';
 
 class NodeTableWidget extends StatelessWidget {

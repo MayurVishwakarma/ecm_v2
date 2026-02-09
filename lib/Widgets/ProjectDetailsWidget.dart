@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable, deprecated_member_use, file_names
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/ProjectDetailsModel.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Screens/Auth/ProjectMenu.dart';
-import 'package:ecm_v2/Utils/Themes/PageTransition.dart';
+import '../../../Core/Models/ProjectDetailsModel.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Screens/Auth/ProjectMenu.dart';
+import '../../../Utils/Themes/PageTransition.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
