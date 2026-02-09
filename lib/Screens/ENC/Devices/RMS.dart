@@ -3,7 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import '../../../Core/Providers/AuthProvider.dart';
 import '../../../Core/Providers/ProjectProvider.dart';
-import '../../../Screens/ENC/OfflineDevices/OfflineRMS.dart';
+import '../OfflineDevices/Offline_rms.dart';
 import '../../../Utils/Themes/color_manager.dart';
 import '../../../Widgets/ENC/NodeTableWidget.dart';
 import 'package:flutter/material.dart';

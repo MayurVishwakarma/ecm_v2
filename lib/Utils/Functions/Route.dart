@@ -15,10 +15,10 @@ import '../../../Screens/Damage/MaterialConsumption/Report/MaterialDetailReport.
 import '../../../Screens/Damage/MaterialConsumption/Report/MaterialReportList.dart';
 import '../../../Screens/Damage/RectificationForm/Reports/RectificationReport.dart';
 import '../../../Screens/ENC/ECMTabBarPage.dart';
-import '../../../Screens/ENC/OfflineDevices/OfflineAMS.dart';
-import '../../../Screens/ENC/OfflineDevices/OfflineLoRa.dart';
-import '../../../Screens/ENC/OfflineDevices/OfflineOMS.dart';
-import '../../../Screens/ENC/OfflineDevices/OfflineRMS.dart';
+import '../../Screens/ENC/OfflineDevices/Offline_ams.dart';
+import '../../Screens/ENC/OfflineDevices/Offline_lora.dart';
+import '../../Screens/ENC/OfflineDevices/Offline_oms.dart';
+import '../../Screens/ENC/OfflineDevices/Offline_rms.dart';
 import '../../../Screens/ENC/Report-History/ReportHistory.dart';
 import '../../../Screens/ENC/Reports/ECMReport.dart';
 import '../../../Screens/ENC/Reports/OfflineECMReport.dart';
