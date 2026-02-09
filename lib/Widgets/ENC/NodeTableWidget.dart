@@ -1,9 +1,9 @@
 // ignore_for_file: file_names
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/ProcessMasterModel.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Screens/E&C/Reports/OneECMReport.dart';
+import '../../../Core/Models/ProcessMasterModel.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../../../Screens/ENC/Reports/OneECMReport.dart';
 import 'package:flutter/material.dart';
 
 class NodeTableWidget extends StatelessWidget {

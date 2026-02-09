@@ -1,13 +1,13 @@
 // ignore_for_file: avoid_print, unused_catch_clause
 
 import 'package:dio/dio.dart';
-import 'package:ecm_v2/Core/Models/AppversionModel.dart';
-import 'package:ecm_v2/Core/Models/AreaMasterModel.dart';
-import 'package:ecm_v2/Core/Models/DistibutoryMasterModel.dart';
-import 'package:ecm_v2/Core/Models/ProjectDetailsModel.dart';
-import 'package:ecm_v2/Core/Models/ProjectUserModel.dart';
-import 'package:ecm_v2/Core/Models/UserMasterModel.dart';
-import 'package:ecm_v2/Utils/Functions/Url_constants.dart';
+import '../../../Core/Models/AppversionModel.dart';
+import '../../../Core/Models/AreaMasterModel.dart';
+import '../../../Core/Models/DistibutoryMasterModel.dart';
+import '../../../Core/Models/ProjectDetailsModel.dart';
+import '../../../Core/Models/ProjectUserModel.dart';
+import '../../../Core/Models/UserMasterModel.dart';
+import '../../../Utils/Functions/Url_constants.dart';
 import 'package:flutter/material.dart';
 
 final dio = Dio(

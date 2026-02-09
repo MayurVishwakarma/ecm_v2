@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
-import 'package:ecm_v2/Core/Models/UserMasterModel.dart';
-import 'package:ecm_v2/Screens/Auth/ProjectList.dart';
+import '../../../Core/Models/UserMasterModel.dart';
+import '../../../Screens/Auth/ProjectList.dart';
 import 'package:flutter/material.dart';
 
 class UserLoginPopup extends StatelessWidget {

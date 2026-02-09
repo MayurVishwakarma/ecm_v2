@@ -1,26 +1,23 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Database/DBHelper.dart';
-import 'package:ecm_v2/Core/Models/EcmNodeMasterModel.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/CustomAppBar.dart';
-import 'package:ecm_v2/Widgets/E&C/NodeTableWidgetOffline.dart';
+import '../../../Core/Database/DBHelper.dart';
+import '../../../Core/Models/EcmNodeMasterModel.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../../../Utils/Themes/color_manager.dart';
+import '../../../Widgets/CustomAppBar.dart';
+import '../../../Widgets/ENC/NodeTableWidgetOffline.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class OfflineOms extends StatefulWidget {
-  static const String routeName = '/offlineOms';
-  const OfflineOms({super.key});
+class OfflineLoRa extends StatefulWidget {
+  static const String routeName = '/offlineLoRa';
+  const OfflineLoRa({super.key});
 
   @override
-  State<OfflineOms> createState() => _OfflineOmsState();
+  State<OfflineLoRa> createState() => _OfflineLoRaState();
 }
 
-class _OfflineOmsState extends State<OfflineOms> {
+class _OfflineLoRaState extends State<OfflineLoRa> {
   List<EcmNodeListMasterModel>? ecmNodes;
-  TextEditingController searchController = TextEditingController();
-  String? searchQuery;
 
   @override
   void initState() {
@@ -29,7 +26,10 @@ class _OfflineOmsState extends State<OfflineOms> {
     super.initState();
   }
 
-  Future<void> getEcmNodes({required int projectId, String deviceType = 'OMS'}) async {
+  Future<void> getEcmNodes({
+    required int projectId,
+    String deviceType = 'LORA',
+  }) async {
     var result = await NodeDB.instance.fetchNodeByDeviceType(
       deviceType,
       projectId,
@@ -47,7 +47,7 @@ class _OfflineOmsState extends State<OfflineOms> {
 
     return Scaffold(
       appBar: AppBar(
-        title: customECMAppbar(context, 'Offline-OMS', ap.selectedProject),
+        title: customECMAppbar(context, 'Offline-LORA', ap.selectedProject),
       ),
       body: SizedBox(
         width: double.infinity,
@@ -55,91 +55,34 @@ class _OfflineOmsState extends State<OfflineOms> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8.0,
-              ),
-              child: TextFormField(
-                controller: searchController,
-                onChanged: (value) {
-                  setState(() {
-                    if (value.isEmpty) {
-                      getEcmNodes(projectId: ap.selectedProject!.id!);
-                      return;
-                    }
-                    ecmNodes = ecmNodes!
-                        .where(
-                          (node) => node.chakNo!.toLowerCase().contains(
-                            value.toLowerCase(),
-                          ),
-                        )
-                        .toList();
-                  });
-                },
-                decoration: InputDecoration(
-                  isDense: true,
-                  labelText: 'Search by Chak No.'.tr(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black,
-                    ),
-                  ),
-                  suffixIcon: Icon(Icons.search, size: 30),
-                ),
-              ),
-            ),
-
             if (ep.processList != null && ep.processList!.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Table(
-                  border: TableBorder.all(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      topRight: Radius.circular(12),
-                    ),
-                  ),
-                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                  border: TableBorder.all(color: Colors.grey.shade300),
                   columnWidths: {
                     0: FixedColumnWidth(130), // Chak No. column fixed width
                   },
                   children: [
                     TableRow(
-                      decoration: BoxDecoration(
-                        color: ColorManager.ecoGreen,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12),
-                        ),
-                      ),
+                      decoration: BoxDecoration(color: ColorManager.ecoGreen),
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
                               Text(
-                                'ChakNo'.tr(),
+                                'Gateway Name',
                                 style: TextStyle(
-                                  // color: Colors.white,
+                                  color: Colors.white,
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                '(Distri-Area)'.tr(),
+                                '(Gateway No.)',
                                 style: TextStyle(
-                                  // color: Colors.white,
+                                  color: Colors.white,
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -156,14 +99,12 @@ class _OfflineOmsState extends State<OfflineOms> {
                               width: 100,
                               child: Text(
                                 ep.ConvertLongtoShortString(
-                                  process.processName!.tr(),
+                                  process.processName!,
                                 ),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  // color: Colors.white,
-                                  fontSize: context.locale.languageCode != 'en'
-                                      ? 12
-                                      : 10,
+                                  color: Colors.white,
+                                  fontSize: 10,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -189,7 +130,7 @@ class _OfflineOmsState extends State<OfflineOms> {
                   NodeDB.instance.deleteNode();
                   getEcmNodes(
                     projectId: ap.selectedProject!.id!,
-                    deviceType: 'OMS',
+                    deviceType: 'LORA',
                   );
                 },
                 style: TextButton.styleFrom(

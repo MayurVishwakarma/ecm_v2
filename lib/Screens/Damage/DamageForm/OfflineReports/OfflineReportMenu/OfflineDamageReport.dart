@@ -1,13 +1,13 @@
 // ignore_for_file: file_names, depend_on_referenced_packages, unused_local_variable, use_build_context_synchronously, prefer_final_fields, no_leading_underscores_for_local_identifiers, deprecated_member_use, unnecessary_null_comparison
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Database/DamageDBHelper.dart';
-import 'package:ecm_v2/Core/Models/Damage/DamageReportModel.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/Damage/DamageImagePicker.dart';
-import 'package:ecm_v2/Widgets/POP-Ups/SubmitDialog.dart';
+import '../../../../../Core/Database/DamageDBHelper.dart';
+import '../../../../../Core/Models/Damage/DamageReportModel.dart';
+import '../../../../../Core/Providers/AuthProvider.dart';
+import '../../../../../Core/Providers/DamageProvider.dart';
+import '../../../../../Utils/Themes/color_manager.dart';
+import '../../../../../Widgets/Damage/DamageImagePicker.dart';
+import '../../../../../Widgets/POP-Ups/SubmitDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

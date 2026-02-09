@@ -1,8 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/Damage/InfromationHistoryModel.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
+import '../../../Core/Models/Damage/InfromationHistoryModel.dart';
+import '../../../Utils/Themes/color_manager.dart';
 import 'package:flutter/material.dart';
 
 class InfromationHistoryTile extends StatelessWidget {

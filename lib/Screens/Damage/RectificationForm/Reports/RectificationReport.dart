@@ -1,15 +1,15 @@
 // ignore_for_file: file_names, depend_on_referenced_packages, unused_local_variable, use_build_context_synchronously, prefer_final_fields, no_leading_underscores_for_local_identifiers, deprecated_member_use
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/Damage/RectificationReportModel.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ConnectivityProvider.dart';
-import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/CustomAppBar.dart';
-import 'package:ecm_v2/Widgets/Damage/RectificationImagePicker.dart';
-import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
-import 'package:ecm_v2/Widgets/POP-Ups/SubmitDialog.dart';
+import '../../../../../Core/Models/Damage/RectificationReportModel.dart';
+import '../../../../../Core/Providers/AuthProvider.dart';
+import '../../../../../Core/Providers/ConnectivityProvider.dart';
+import '../../../../../Core/Providers/DamageProvider.dart';
+import '../../../../../Utils/Themes/color_manager.dart';
+import '../../../../../Widgets/CustomAppBar.dart';
+import '../../../../../Widgets/Damage/RectificationImagePicker.dart';
+import '../../../../../Widgets/POP-Ups/ChangeLanguage.dart';
+import '../../../../../Widgets/POP-Ups/SubmitDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

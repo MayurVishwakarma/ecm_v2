@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_nullable_for_final_variable_declarations, avoid_print, file_names
 
 import 'dart:io';
-import 'package:ecm_v2/Widgets/CustomAppBar.dart';
+import '../../../Widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';

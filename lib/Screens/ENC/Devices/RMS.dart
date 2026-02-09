@@ -1,22 +1,22 @@
 // ignore_for_file: avoid_print
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Screens/E&C/OfflineDevices/OfflineAMS.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/E&C/NodeTableWidget.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../OfflineDevices/Offline_rms.dart';
+import '../../../Utils/Themes/color_manager.dart';
+import '../../../Widgets/ENC/NodeTableWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AmsPage extends StatefulWidget {
-  const AmsPage({super.key});
+class RmsPage extends StatefulWidget {
+  const RmsPage({super.key});
 
   @override
-  State<AmsPage> createState() => _AmsPageState();
+  State<RmsPage> createState() => _RmsPageState();
 }
 
-class _AmsPageState extends State<AmsPage> {
+class _RmsPageState extends State<RmsPage> {
   late ScrollController _controller;
   TextEditingController _searchController = TextEditingController();
   String? searchQuery;
@@ -30,13 +30,13 @@ class _AmsPageState extends State<AmsPage> {
       final pp = Provider.of<ProjectProvider>(context, listen: false);
       final ap = Provider.of<AuthProvider>(context, listen: false);
 
-      pp.updateSource('AMS');
+      pp.updateSource('RMS');
       ap.updateSelectedArea(null);
       ap.updateSelectedDistributory(null);
       ap.getAreaList(ap.selectedProject?.id);
       ap.getDistributoryList('all', ap.selectedProject?.id);
       pp.loadProcesses(
-        source: pp.source ?? 'AMS',
+        source: pp.source ?? 'RMS',
         projectId: ap.selectedProject!.id,
       );
 
@@ -70,7 +70,7 @@ class _AmsPageState extends State<AmsPage> {
           subProcess: 'all',
           index: 0,
           limit: 30,
-          source: ep.source ?? 'AMS',
+          source: ep.source ?? 'RMS',
         )
         .whenComplete(() => ep.updateFirstLoad(false));
   }
@@ -96,7 +96,7 @@ class _AmsPageState extends State<AmsPage> {
             subProcess: ep.selectedSubProcess?.subProcessId.toString() ?? 'all',
             index: ep.index,
             limit: 30,
-            source: ep.source ?? 'AMS',
+            source: ep.source ?? 'RMS',
           )
           .whenComplete(() => ep.updateLoadMore(false));
     }
@@ -128,7 +128,7 @@ class _AmsPageState extends State<AmsPage> {
                   },
                   decoration: InputDecoration(
                     isDense: true,
-                    labelText: 'Search by AMS No.'.tr(),
+                    labelText: 'Search by RMS No.'.tr(),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Theme.of(context).brightness == Brightness.dark
@@ -436,7 +436,6 @@ class _AmsPageState extends State<AmsPage> {
                     },
                   ),
                 ),
-              // -------- Offline AMS Node ----------
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -446,7 +445,7 @@ class _AmsPageState extends State<AmsPage> {
                       onPressed: () {
                         Navigator.pushNamedAndRemoveUntil(
                           context,
-                          OfflineAms.routeName,
+                          OfflineRms.routeName,
                           (route) => true,
                         );
                       },
@@ -477,7 +476,7 @@ class _AmsPageState extends State<AmsPage> {
                             child: Column(
                               children: [
                                 Text(
-                                  'AMS No'.tr(),
+                                  'RMS No'.tr(),
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 12,
@@ -510,7 +509,7 @@ class _AmsPageState extends State<AmsPage> {
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize:
-                                        context.locale.languageCode != 'en'
+                                        context.locale.languageCode == 'hi'
                                         ? 12
                                         : 10,
                                     fontWeight: FontWeight.w500,

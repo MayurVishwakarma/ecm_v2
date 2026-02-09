@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/ReportHistoryModel.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
+import '../../../Core/Models/ReportHistoryModel.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
 import 'package:flutter/material.dart';
 
 class ReportHistoryWidget extends StatelessWidget {

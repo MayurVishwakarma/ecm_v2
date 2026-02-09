@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Utils/Themes/theme_manager.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Utils/Themes/color_manager.dart';
+import '../../../Utils/Themes/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

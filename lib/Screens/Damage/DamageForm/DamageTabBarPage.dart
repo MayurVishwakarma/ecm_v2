@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
-import 'package:ecm_v2/Screens/Damage/DamageForm/Devices/AMS.dart';
-import 'package:ecm_v2/Screens/Damage/DamageForm/Devices/LORA.dart';
-import 'package:ecm_v2/Screens/Damage/DamageForm/Devices/OMS.dart';
-import 'package:ecm_v2/Screens/Damage/DamageForm/Devices/RMS.dart';
-import 'package:ecm_v2/Widgets/CustomAppBar.dart';
-import 'package:ecm_v2/Widgets/POP-Ups/ChangeLanguage.dart';
+import '../../../../Core/Providers/AuthProvider.dart';
+import '../../../../Core/Providers/DamageProvider.dart';
+import '../../../../Screens/Damage/DamageForm/Devices/AMS.dart';
+import '../../../../Screens/Damage/DamageForm/Devices/LORA.dart';
+import '../../../../Screens/Damage/DamageForm/Devices/OMS.dart';
+import '../../../../Screens/Damage/DamageForm/Devices/RMS.dart';
+import '../../../../Widgets/CustomAppBar.dart';
+import '../../../../Widgets/POP-Ups/ChangeLanguage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

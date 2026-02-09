@@ -1,6 +1,6 @@
-import 'package:ecm_v2/Core/Models/ProjectDetailsModel.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Screens/Auth/ProjectMenu.dart';
+import '../../../Core/Models/ProjectDetailsModel.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Screens/Auth/ProjectMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

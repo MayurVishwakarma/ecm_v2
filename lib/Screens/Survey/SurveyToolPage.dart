@@ -1,5 +1,5 @@
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Widgets/CustomAppBar.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

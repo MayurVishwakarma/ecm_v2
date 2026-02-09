@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:ecm_v2/Core/Models/ProjectDetailsModel.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
+import '../../../Core/Models/ProjectDetailsModel.dart';
+import '../../../Core/Providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

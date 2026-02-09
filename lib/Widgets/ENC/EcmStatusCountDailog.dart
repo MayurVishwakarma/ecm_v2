@@ -1,9 +1,9 @@
 // ignore_for_file: file_names, must_be_immutable
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
+import '../../../Core/Providers/AuthProvider.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../../../Utils/Themes/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

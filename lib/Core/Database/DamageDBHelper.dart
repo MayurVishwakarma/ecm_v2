@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 
-import 'package:ecm_v2/Core/Models/Damage/DamageNodeMasterModel.dart';
-import 'package:ecm_v2/Core/Models/Damage/DamageReportModel.dart';
-import 'package:ecm_v2/Core/Models/Damage/MaterialReportModel.dart';
+import '../../../Core/Models/Damage/DamageNodeMasterModel.dart';
+import '../../../Core/Models/Damage/DamageReportModel.dart';
+import '../../../Core/Models/Damage/MaterialReportModel.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

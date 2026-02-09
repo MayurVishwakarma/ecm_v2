@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/Damage/MaterialStatusCountModel.dart';
-import 'package:ecm_v2/Core/Providers/AuthProvider.dart';
-import 'package:ecm_v2/Core/Providers/DamageProvider.dart';
-import 'package:ecm_v2/Screens/Damage/MaterialConsumption/Report/MaterialReportList.dart';
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
-import 'package:ecm_v2/Widgets/TableRowBuilder.dart';
+import '../../../../Core/Models/Damage/MaterialStatusCountModel.dart';
+import '../../../../Core/Providers/AuthProvider.dart';
+import '../../../../Core/Providers/DamageProvider.dart';
+import '../../../../Screens/Damage/MaterialConsumption/Report/MaterialReportList.dart';
+import '../../../../Utils/Themes/color_manager.dart';
+import '../../../../Widgets/TableRowBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:filter_list/filter_list.dart';

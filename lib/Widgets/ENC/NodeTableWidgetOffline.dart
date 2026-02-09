@@ -1,5 +1,5 @@
-import 'package:ecm_v2/Core/Providers/ProjectProvider.dart';
-import 'package:ecm_v2/Screens/E&C/Reports/OfflineECMReport.dart';
+import '../../../Core/Providers/ProjectProvider.dart';
+import '../../../Screens/ENC/Reports/OfflineECMReport.dart';
 import 'package:flutter/material.dart';
 
 class NodeTableWidgetOffline extends StatelessWidget {

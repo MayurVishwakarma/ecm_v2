@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:ecm_v2/Utils/Themes/color_manager.dart';
+import '../../../Utils/Themes/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

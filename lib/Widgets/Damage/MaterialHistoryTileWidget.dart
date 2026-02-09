@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/Damage/MaterialHistoryModel.dart';
+import '../../../Core/Models/Damage/MaterialHistoryModel.dart';
 import 'package:flutter/material.dart';
 
 class MatrialHistoryTile extends StatelessWidget {

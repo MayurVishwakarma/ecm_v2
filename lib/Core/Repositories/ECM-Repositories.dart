@@ -2,15 +2,15 @@
 
 import 'dart:convert';
 
-// import 'package:ecm_v2/Core/Models/AreaMasterModel.dart';
-// import 'package:ecm_v2/Core/Models/DistibutoryMasterModel.dart';
-import 'package:ecm_v2/Core/Models/ECMReportModel.dart';
-import 'package:ecm_v2/Core/Models/ECMStatusCountModel.dart';
+// import '../../../Core/Models/AreaMasterModel.dart';
+// import '../../../Core/Models/DistibutoryMasterModel.dart';
+import '../../../Core/Models/ECMReportModel.dart';
+import '../../../Core/Models/ECMStatusCountModel.dart';
 import 'package:dio/dio.dart';
-import 'package:ecm_v2/Core/Models/EcmNodeMasterModel.dart';
-import 'package:ecm_v2/Core/Models/ProcessMasterModel.dart';
-import 'package:ecm_v2/Core/Models/ReportHistoryModel.dart';
-import 'package:ecm_v2/Utils/Functions/Url_constants.dart';
+import '../../../Core/Models/EcmNodeMasterModel.dart';
+import '../../../Core/Models/ProcessMasterModel.dart';
+import '../../../Core/Models/ReportHistoryModel.dart';
+import '../../../Utils/Functions/Url_constants.dart';
 import 'package:flutter/material.dart';
 
 final Dio dio = Dio();

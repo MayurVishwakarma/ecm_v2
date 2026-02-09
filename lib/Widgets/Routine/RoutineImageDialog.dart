@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ecm_v2/Core/Models/Routine/RoutineReportModel.dart';
-import 'package:ecm_v2/Core/Providers/RoutineProvider.dart';
-import 'package:ecm_v2/Utils/Functions/ImagePriviewWidget.dart';
+import '../../../Core/Models/Routine/RoutineReportModel.dart';
+import '../../../Core/Providers/RoutineProvider.dart';
+import '../../../Utils/Functions/ImagePriviewWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
