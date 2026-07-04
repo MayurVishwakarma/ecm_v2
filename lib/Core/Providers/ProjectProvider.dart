@@ -22,7 +22,6 @@ import '../../../Utils/Functions/locationProcessHelper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' hide context;
 import 'package:provider/provider.dart';
 
 class ProjectProvider extends ChangeNotifier {
@@ -354,12 +353,12 @@ class ProjectProvider extends ChangeNotifier {
       final tempDir = await getTemporaryDirectory();
       final watermarkedFile = File('${tempDir.path}/${imgPicker.name}');
       await watermarkedFile.writeAsBytes(watermarkedBytes);
-
-      final externalDir = await getExternalStorageDirectory();
-      final fileName = basename(watermarkedFile.path);
-      await imgPicker.saveTo('${externalDir!.path}/$fileName');
+      if (media == ImageSource.camera) {
+        await markCameraImageForGallery(watermarkedFile.path);
+      }
 
       // update checklist item with image
+      await unmarkCameraImageForGallery(imageItem.image?.path);
       updateChecklistItem(
         imageItem,
         watermarkedBytes,
@@ -385,6 +384,7 @@ class ProjectProvider extends ChangeNotifier {
   }
 
   void deleteImage(EcmReportMasterModel model) {
+    unmarkCameraImageForGallery(model.image?.path);
     model.image = null;
     model.imageByteArray = null;
     model.value = null;
@@ -466,6 +466,15 @@ class ProjectProvider extends ChangeNotifier {
     try {
       Future.microtask(() => updateLoad(true));
       Future.microtask(() => updateChecklistModel([]));
+
+      if (deviceId <= 0 || processId <= 0 || projectId <= 0) {
+        updateChecklistModel([]);
+        updateLoad(false);
+        throw Exception(
+          'Invalid report selection. Please go back and select the node again.',
+        );
+      }
+
       var result = await getECMReportByProcessId(
         deviceId: deviceId,
         processId: processId,
@@ -474,16 +483,16 @@ class ProjectProvider extends ChangeNotifier {
       );
       _originalDescriptions = result.map((e) => e.description ?? '').toList();
       _originalSubProcess = result.map((e) => e.subProcessName ?? '').toList();
-      if (langCode != 'en' || langCode != null) {
+      if (langCode != null && langCode != 'en') {
         result = await Future.wait(
           result.map((e) async {
             e.description = await TranslationHelper.translate(
               e.description ?? '',
-              langCode ?? 'en',
+              langCode,
             );
             e.subProcessName = await TranslationHelper.translate(
               e.subProcessName ?? '',
-              langCode ?? 'en',
+              langCode,
             );
             return e;
           }),
@@ -491,12 +500,22 @@ class ProjectProvider extends ChangeNotifier {
       }
 
       updateChecklistModel(result);
-      if (result.first.workedBy != null) {
-        await getProjectUserDetailsByUserId(result.first.workedBy, projectId);
+      if (result.isEmpty) {
+        updateLoad(false);
+        return;
       }
-      if (result.first.approvedBy != null) {
+
+      final workedBy = int.tryParse(result.first.workedBy?.toString() ?? '');
+      final approvedBy = int.tryParse(
+        result.first.approvedBy?.toString() ?? '',
+      );
+
+      if (workedBy != null) {
+        await getProjectUserDetailsByUserId(workedBy, projectId);
+      }
+      if (approvedBy != null) {
         await getProjectUserDetailsByUserId(
-          result.first.approvedBy,
+          approvedBy,
           projectId,
           isWork: false,
         );
@@ -507,9 +526,14 @@ class ProjectProvider extends ChangeNotifier {
       });
     } catch (e) {
       updateLoad(false);
-      throw Exception('Failed to fetch ECM report: $e');
+      debugPrint('Error fetching ECM report: $e');
+      throw Exception(_cleanExceptionMessage(e));
     }
     notifyListeners();
+  }
+
+  String _cleanExceptionMessage(Object error) {
+    return error.toString().replaceFirst(RegExp(r'^Exception:\s*'), '');
   }
 
   Future<void> getReportHistory({
@@ -810,7 +834,7 @@ class ProjectProvider extends ChangeNotifier {
         }
       } else {
         if (proStatus == 1) {
-          approveStatus = 'Partially';
+          approveStatus = 'Partially Done';
         } else if (proStatus == 2) {
           approveStatus = 'Completed';
         } else if (proStatus == 3) {
@@ -1102,28 +1126,26 @@ class ProjectProvider extends ChangeNotifier {
       ).format(DateTime.now());
       int countflag = 0;
       int uploadflag = 0;
-      await Future.wait(
-        imageList
-            .where(
-              (element) =>
-                  (element.inputType == 'image' ||
-                      element.inputType == 'pdf') &&
-                  element.image != null,
-            )
-            .map((element) async {
-              String? imagePathValue = await uploadImageAndGetPath(
-                element.image!.path,
-                _source!.toUpperCase(),
-                getDeviceIdBySource(_source!),
-                projectId,
-              );
-              if (imagePathValue!.isNotEmpty) {
-                element.value = imagePathValue;
-                uploadflag++;
-              }
-              countflag++;
-            }),
+      final filesToUpload = imageList.where(
+        (element) =>
+            (element.inputType == 'image' || element.inputType == 'pdf') &&
+            element.image != null,
       );
+
+      for (final element in filesToUpload) {
+        final imagePathValue = await uploadImageAndGetPath(
+          element.image!.path,
+          _source!.toUpperCase(),
+          getDeviceIdBySource(_source!),
+          projectId,
+        );
+
+        if (imagePathValue != null && imagePathValue.isNotEmpty) {
+          element.value = imagePathValue;
+          uploadflag++;
+        }
+        countflag++;
+      }
 
       var checkListId = imageList.map((e) => e.checkListId).toList().join(",");
       var valueData = imageList.map((e) => e.value ?? '').toList().join(",");
@@ -1147,6 +1169,9 @@ class ProjectProvider extends ChangeNotifier {
 
       if (countflag == uploadflag) {
         var result = await uploadECMReport(data);
+        if (result) {
+          await savePendingCameraImagesToGallery(imageList.map((e) => e.image));
+        }
         return result;
       } else {
         return false;

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
+import 'dart:io';
 
 // import '../../../Core/Models/AreaMasterModel.dart';
 // import '../../../Core/Models/DistibutoryMasterModel.dart';
@@ -12,9 +13,39 @@ import '../../../Core/Models/ProcessMasterModel.dart';
 import '../../../Core/Models/ReportHistoryModel.dart';
 import '../../../Utils/Functions/Url_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as path;
 
 final Dio dio = Dio();
 var headers = {'Content-Type': 'application/json'};
+
+String _apiErrorMessage(dynamic data, int? statusCode) {
+  String? readMapMessage(dynamic value) {
+    if (value is! Map) return null;
+
+    for (final key in const ['Message', 'message', 'Error', 'error']) {
+      final message = value[key]?.toString().trim();
+      if (message != null && message.isNotEmpty) return message;
+    }
+
+    return readMapMessage(value['data']);
+  }
+
+  final mapMessage = readMapMessage(data);
+  if (mapMessage != null) return mapMessage;
+
+  if (data is String && data.trim().isNotEmpty) {
+    return data.trim();
+  }
+
+  return statusCode == null
+      ? 'Unable to load report. Please try again.'
+      : 'Unable to load report. Server returned $statusCode.';
+}
+
+String _cleanExceptionMessage(Object error) {
+  return error.toString().replaceFirst(RegExp(r'^Exception:\s*'), '');
+}
+
 /*Future<List<AreaMasterModel>> getAreaMaster(int? projectId) async {
   try {
     var response = await dio.get(
@@ -149,7 +180,7 @@ Future<ECMStatusCountMasterModel> getECMReportStatusCount(
       options: Options(method: 'GET', headers: headers),
     );
 
-    print(response.realUri);
+    debugPrint(response.realUri.toString());
 
     if (response.statusCode == 200) {
       return ECMStatusCountMasterModel.fromJson(
@@ -194,7 +225,7 @@ Future<List<EcmNodeListMasterModel>> getECMNodeList({
       ),
       options: Options(method: 'GET'),
     );
-    print(response.realUri);
+    debugPrint(response.realUri.toString());
     if (response.statusCode == 200) {
       List<EcmNodeListMasterModel> result = [];
       response.data['data']['Response'].forEach((v) {
@@ -218,28 +249,45 @@ Future<List<EcmReportMasterModel>> getECMReportByProcessId({
   required int projectId,
 }) async {
   try {
-    var response = await dio.request(
-      GetHttpRequest(
-        ecmApiPrefix,
-        'ecmdetailreport/$projectId/$processId/$source/$deviceId',
-      ),
-      options: Options(method: 'GET', headers: headers),
+    final url = GetHttpRequest(
+      ecmApiPrefix,
+      'ecmdetailreport/$projectId/$processId/$source/$deviceId',
     );
-    print(response.realUri);
+
+    var response = await dio.request(
+      url,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+        validateStatus: (status) => status != null && status < 600,
+      ),
+    );
+    debugPrint(url);
 
     if (response.statusCode == 200) {
       List<EcmReportMasterModel> result = [];
-      response.data['data']['Response'].forEach((v) {
+      final responseData = response.data;
+      final data = responseData is Map ? responseData['data'] : null;
+      final items = data is Map ? data['Response'] ?? [] : [];
+      items.forEach((v) {
         result.add(EcmReportMasterModel.fromJson(v));
       });
       return result;
     } else {
-      print("Error: ${response.statusCode} - ${response.statusMessage}");
-      throw Exception('Failed to load API');
+      final message = _apiErrorMessage(response.data, response.statusCode);
+      debugPrint(
+        "ECM report detail failed [${response.statusCode}] $url: ${response.data}",
+      );
+      throw Exception(message);
     }
+  } on DioException catch (e) {
+    final message = _apiErrorMessage(e.response?.data, e.response?.statusCode);
+    debugPrint("Error in getECMReportByProcessId: $message");
+    throw Exception(message);
   } catch (e) {
-    print("Error in getECMReportByProcessId: $e");
-    throw Exception('Failed to load API');
+    final message = _cleanExceptionMessage(e);
+    debugPrint("Error in getECMReportByProcessId: $message");
+    throw Exception(message);
   }
 }
 
@@ -266,7 +314,7 @@ Future<List<ReportHistoryModel>> getEcmReportHistory({
       ),
       options: Options(method: 'GET'),
     );
-    print(response.realUri);
+    debugPrint(response.realUri.toString());
     if (response.statusCode == 200) {
       List<ReportHistoryModel> result = [];
       response.data['data']['Response'].forEach((v) {
@@ -288,28 +336,47 @@ Future<String?> uploadImageAndGetPath(
   int projectId,
 ) async {
   try {
-    final fileName = filePath.split('/').last;
+    final file = File(filePath);
+    if (!await file.exists()) {
+      debugPrint('ECM file upload skipped. File not found: $filePath');
+      return null;
+    }
+
+    final fileName = path.basename(file.path);
+    final uploadUrl = GetHttpRequest(
+      ecmImagePrefix,
+      '$projectId/$deviceType/$deviceId',
+    );
 
     final formData = FormData.fromMap({
-      'ecmFile': await MultipartFile.fromFile(filePath, filename: fileName),
+      'ecmFile': await MultipartFile.fromFile(file.path, filename: fileName),
     });
 
     final response = await dio.post(
-      GetHttpRequest(ecmImagePrefix, '$projectId/$deviceType/$deviceId'),
+      uploadUrl,
       data: formData,
+      options: Options(
+        contentType: 'multipart/form-data',
+        validateStatus: (status) => status != null && status < 600,
+      ),
     );
 
     if (response.statusCode == 200 && response.data != null) {
       // Response is a plain text path string like: /SEE...
       return response.data.toString().trim();
     } else {
-      print(
-        '❌ Upload failed with status: ${response.statusCode} - ${response.statusMessage}',
+      debugPrint(
+        'ECM file upload failed [${response.statusCode}] $uploadUrl: ${response.data}',
       );
       return null;
     }
+  } on DioException catch (e) {
+    debugPrint(
+      'ECM file upload request failed [${e.response?.statusCode}]: ${e.response?.data ?? e.message}',
+    );
+    return null;
   } catch (e) {
-    print('❌ Error uploading file: $e');
+    debugPrint('ECM file upload error: $e');
     return null;
   }
 }
@@ -333,7 +400,7 @@ Future<bool> uploadECMReport(dynamic payload) async {
       return false;
     }
   } catch (e) {
-    print(jsonDecode(e.toString()));
+    debugPrint(jsonDecode(e.toString()));
     throw Exception("Failed to upload ECM report");
   }
 }
@@ -357,7 +424,7 @@ Future<bool> changeApproveStatus(dynamic payload) async {
       return false;
     }
   } catch (e) {
-    print(jsonDecode(e.toString()));
+    debugPrint(jsonDecode(e.toString()));
     throw Exception("Failed to change ECM report status");
   }
 }

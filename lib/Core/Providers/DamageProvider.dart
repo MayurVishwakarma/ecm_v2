@@ -27,7 +27,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:path/path.dart' hide context;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
@@ -435,12 +434,12 @@ class DamageProvider extends ChangeNotifier {
       final tempDir = await getTemporaryDirectory();
       final watermarkedFile = File('${tempDir.path}/${imgPicker.name}');
       await watermarkedFile.writeAsBytes(watermarkedBytes);
-
-      final externalDir = await getExternalStorageDirectory();
-      final fileName = basename(watermarkedFile.path);
-      await imgPicker.saveTo('${externalDir!.path}/$fileName');
+      if (media == ImageSource.camera) {
+        await markCameraImageForGallery(watermarkedFile.path);
+      }
 
       // update checklist item with image
+      await unmarkCameraImageForGallery(imageItem.image?.path);
       updateChecklistItem(
         imageItem,
         watermarkedBytes,
@@ -466,6 +465,7 @@ class DamageProvider extends ChangeNotifier {
   }
 
   void deleteImage(DamageReportModel model) {
+    unmarkCameraImageForGallery(model.image?.path);
     model.image = null;
     model.imageByteArray = null;
     model.value = null;
@@ -495,12 +495,12 @@ class DamageProvider extends ChangeNotifier {
       final tempDir = await getTemporaryDirectory();
       final watermarkedFile = File('${tempDir.path}/${imgPicker.name}');
       await watermarkedFile.writeAsBytes(watermarkedBytes);
-
-      final externalDir = await getExternalStorageDirectory();
-      final fileName = basename(watermarkedFile.path);
-      await imgPicker.saveTo('${externalDir!.path}/$fileName');
+      if (media == ImageSource.camera) {
+        await markCameraImageForGallery(watermarkedFile.path);
+      }
 
       // update checklist item with image
+      await unmarkCameraImageForGallery(imageItem.image?.path);
       updateRectificationChecklistItem(
         imageItem,
         watermarkedBytes,
@@ -526,6 +526,7 @@ class DamageProvider extends ChangeNotifier {
   }
 
   void deleteRectificationImage(RectificationReportModel model) {
+    unmarkCameraImageForGallery(model.image?.path);
     model.image = null;
     model.imageByteArray = null;
     model.value = null;
@@ -989,6 +990,9 @@ class DamageProvider extends ChangeNotifier {
 
       if (countflag == uploadflag) {
         var result = await uploadDamageReport(data);
+        if (result) {
+          await savePendingCameraImagesToGallery(report.map((e) => e.image));
+        }
         return result;
       } else {
         return false;
@@ -1082,6 +1086,9 @@ class DamageProvider extends ChangeNotifier {
 
       if (countflag == uploadflag) {
         var result = await uploadInfromationReport(data);
+        if (result) {
+          await savePendingCameraImagesToGallery(report.map((e) => e.image));
+        }
         return result;
       } else {
         return false;
@@ -1145,6 +1152,9 @@ class DamageProvider extends ChangeNotifier {
 
       if (countflag == uploadflag) {
         var result = await uploadRectificationReport(data);
+        if (result) {
+          await savePendingCameraImagesToGallery(report.map((e) => e.image));
+        }
         return result;
       } else {
         return false;

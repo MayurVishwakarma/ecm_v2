@@ -1,9 +1,14 @@
 // ignore_for_file: strict_top_level_inference
 
+import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+const MethodChannel _galleryChannel = MethodChannel('ecm_v2/gallery');
+const String _pendingCameraImagesKey = 'pendingCameraImagePaths';
 
 class ImageProcessingInput {
   final Uint8List byteData;
@@ -81,4 +86,56 @@ Future<XFile> getPrefImage(checkListId) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   var imagePath1 = pref.getString(checkListId.toString());
   return XFile(imagePath1 ?? '');
+}
+
+Future<void> markCameraImageForGallery(String imagePath) async {
+  final prefs = await SharedPreferences.getInstance();
+  final paths = prefs.getStringList(_pendingCameraImagesKey) ?? <String>[];
+  if (!paths.contains(imagePath)) {
+    paths.add(imagePath);
+    await prefs.setStringList(_pendingCameraImagesKey, paths);
+  }
+}
+
+Future<void> unmarkCameraImageForGallery(String? imagePath) async {
+  if (imagePath == null || imagePath.isEmpty) {
+    return;
+  }
+
+  final prefs = await SharedPreferences.getInstance();
+  final paths = prefs.getStringList(_pendingCameraImagesKey) ?? <String>[];
+  if (paths.remove(imagePath)) {
+    await prefs.setStringList(_pendingCameraImagesKey, paths);
+  }
+}
+
+Future<void> savePendingCameraImagesToGallery(Iterable<XFile?> files) async {
+  final prefs = await SharedPreferences.getInstance();
+  final pendingPaths =
+      prefs.getStringList(_pendingCameraImagesKey) ?? <String>[];
+  if (pendingPaths.isEmpty) {
+    return;
+  }
+
+  final savedPaths = <String>[];
+  for (final file in files.whereType<XFile>()) {
+    final path = file.path;
+    if (!pendingPaths.contains(path) || !await File(path).exists()) {
+      continue;
+    }
+
+    final saved = await _galleryChannel.invokeMethod<bool>(
+          'saveImageToGallery',
+          {'path': path},
+        ) ??
+        false;
+    if (saved) {
+      savedPaths.add(path);
+    }
+  }
+
+  if (savedPaths.isNotEmpty) {
+    pendingPaths.removeWhere(savedPaths.contains);
+    await prefs.setStringList(_pendingCameraImagesKey, pendingPaths);
+  }
 }

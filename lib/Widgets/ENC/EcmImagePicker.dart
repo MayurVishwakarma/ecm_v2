@@ -3,6 +3,7 @@ import '../../../Core/Models/ECMReportModel.dart';
 import '../../../Core/Providers/AuthProvider.dart';
 import '../../../Core/Providers/ProjectProvider.dart';
 import '../../../Utils/Functions/ImagePriviewWidget.dart';
+import '../../../Utils/Themes/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -21,105 +22,229 @@ class _EcmImagePickerState extends State<EcmImagePicker> {
   @override
   Widget build(BuildContext context) {
     final ep = Provider.of<ProjectProvider>(context);
-    List<EcmReportMasterModel>? imageList = ep.checklistModel!
+    final imageList = (ep.checklistModel ?? [])
         .where((e) => e.inputType == 'image')
         .toList();
-    final hasImage = imageList.any(
-      (e) =>
-          e.processId ==
-              ep.checklistModel!
-                  .where((e) => e.inputType == 'image')
-                  .toList()
-                  .first
-                  .processId &&
-          e.inputType == 'image' &&
-          e.value != null,
-    );
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                  icon: Align(
-                    alignment: Alignment.centerRight,
-                    child: IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  content: SizedBox(
-                    width: 500,
-                    child: Consumer<ProjectProvider>(
-                      builder: (context, ep, _) {
-                        final imageList = ep.checklistModel!
-                            .where((e) => e.inputType == 'image')
-                            .toList();
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: imageList.length,
-                          itemBuilder: (_, index) =>
-                              _buildImageListItem(imageList[index]),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              );
-            },
-            child: Image.asset(
-              hasImage
-                  ? 'assets/images/view-image.png'
-                  : 'assets/images/upload-image.png',
-              height: 80,
-              width: 80,
-              fit: BoxFit.cover,
-            ),
+    if (imageList.isEmpty) return const SizedBox.shrink();
+
+    final uploadedCount = imageList.where(_hasImage).length;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: _showImageDialog,
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF8FAFC),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey.shade200),
           ),
-          Text(
-            hasImage ? 'image'.tr() : 'Noimage'.tr(),
-            style: const TextStyle(fontSize: 16),
+          child: Row(
+            children: [
+              _buildStackedImages(imageList),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '$uploadedCount/${imageList.length} ${'img'.tr()}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      uploadedCount > 0 ? 'image'.tr() : 'Noimage'.tr(),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.grey.shade600,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: ColorManager.ecoGreen.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Icon(
+                  Icons.chevron_right,
+                  color: ColorManager.ecoGreen,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStackedImages(List<EcmReportMasterModel> imageList) {
+    final visibleImages = imageList.take(4).toList();
+
+    return SizedBox(
+      width: 150,
+      height: 76,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          for (var i = 0; i < visibleImages.length; i++)
+            Positioned(
+              left: i * 28,
+              child: _buildStackedThumbnail(
+                visibleImages[i],
+                showMore: i == visibleImages.length - 1 && imageList.length > 4,
+                remaining: imageList.length - 4,
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStackedThumbnail(
+    EcmReportMasterModel imageItem, {
+    required bool showMore,
+    required int remaining,
+  }) {
+    return Container(
+      width: 66,
+      height: 76,
+      decoration: BoxDecoration(
+        color: ColorManager.pureWhite,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: ColorManager.pureWhite, width: 3),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.12),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(6),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            if (imageItem.imageByteArray != null)
+              Image.memory(imageItem.imageByteArray!, fit: BoxFit.cover)
+            else
+              Container(
+                color: Colors.grey.shade100,
+                padding: const EdgeInsets.all(14),
+                child: Image.asset(
+                  'assets/images/upload-image.png',
+                  fit: BoxFit.contain,
+                ),
+              ),
+            if (showMore)
+              Container(
+                color: Colors.black.withValues(alpha: 0.52),
+                alignment: Alignment.center,
+                child: Text(
+                  '+$remaining',
+                  style: const TextStyle(
+                    color: ColorManager.pureWhite,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showImageDialog() {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        icon: Align(
+          alignment: Alignment.centerRight,
+          child: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        content: SizedBox(
+          width: 500,
+          child: Consumer<ProjectProvider>(
+            builder: (context, ep, _) {
+              final imageList = (ep.checklistModel ?? [])
+                  .where((e) => e.inputType == 'image')
+                  .toList();
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: imageList.length,
+                itemBuilder: (_, index) =>
+                    _buildImageListItem(imageList[index]),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
 
   Widget _buildImageListItem(EcmReportMasterModel imageItem) {
     return Container(
-      margin: const EdgeInsets.all(5),
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        border: Border.all(),
-        borderRadius: BorderRadius.circular(6),
+        color: ColorManager.pureWhite,
+        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         trailing: SizedBox(
-          width: 50,
-          height: 50,
+          width: 56,
+          height: 56,
           child: imageItem.imageByteArray != null
               ? InkWell(
                   onTap: () => _previewAlert(imageItem),
-                  child: Image.memory(
-                    imageItem.imageByteArray!,
-                    width: 50,
-                    height: 50,
-                    fit: BoxFit.cover,
+                  borderRadius: BorderRadius.circular(8),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.memory(
+                      imageItem.imageByteArray!,
+                      width: 56,
+                      height: 56,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 )
               : GestureDetector(
                   onTap: () => _uploadAlert(imageItem),
-                  child: Image.asset(
-                    'assets/images/upload-image.png',
-                    width: 50,
-                    height: 50,
-                    fit: BoxFit.cover,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: ColorManager.ecoGreen.withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.all(10),
+                    child: Image.asset(
+                      'assets/images/upload-image.png',
+                      width: 56,
+                      height: 56,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
         ),
@@ -128,7 +253,11 @@ class _EcmImagePickerState extends State<EcmImagePicker> {
           children: [
             Text(
               imageItem.description ?? '',
-              style: const TextStyle(color: Colors.green, fontSize: 15),
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             if (imageItem.imageByteArray != null)
               Text(
@@ -139,6 +268,11 @@ class _EcmImagePickerState extends State<EcmImagePicker> {
         ),
       ),
     );
+  }
+
+  bool _hasImage(EcmReportMasterModel item) {
+    final value = item.value?.toString().trim();
+    return item.imageByteArray != null || (value != null && value.isNotEmpty);
   }
 
   void _previewAlert(EcmReportMasterModel model) {
@@ -202,7 +336,7 @@ class _EcmImagePickerState extends State<EcmImagePicker> {
                         ),
 
                         if (ap.selectedProject != null &&
-                            [40040, 40030].contains(ap.selectedProject?.id))
+                            [40040, 40030, 40042].contains(ap.selectedProject?.id))
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton.icon(
@@ -258,7 +392,7 @@ class _EcmImagePickerState extends State<EcmImagePicker> {
           mainAxisSize: MainAxisSize.min,
           children: [
             if ((ap.selectedProject?.id) != null &&
-                [40040, 40030].contains(
+                [40040, 40030,40042].contains(
                   ap.selectedProject?.id,
                 )) // For specific projects only
               ElevatedButton.icon(

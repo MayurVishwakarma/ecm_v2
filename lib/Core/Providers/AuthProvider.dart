@@ -31,7 +31,7 @@ import 'package:url_launcher/url_launcher.dart';
 enum Keys { user }
 
 class AuthProvider extends ChangeNotifier {
-  final String versionNO = 'v0.1.8';
+  final String versionNO = 'v0.1.9';
   UserMasterModel? _userDetails;
   ProjectUserDetailsModel? _projectUserDetails;
   List<ProjectDetailsModel>? _projectDetails;

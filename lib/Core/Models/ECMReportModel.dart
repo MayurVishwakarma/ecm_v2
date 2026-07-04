@@ -168,19 +168,51 @@ class EcmReportMasterModel {
     );
   }
 
+  static int? _parseInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    return int.tryParse(value.toString().trim());
+  }
+
+  static String? _parseString(dynamic value) {
+    return value?.toString();
+  }
+
+  static DateTime? _parseDate(dynamic value) {
+    if (value == null) return null;
+    if (value is DateTime) return value;
+
+    final text = value.toString().trim();
+    if (text.isEmpty) return null;
+
+    return DateTime.tryParse(text);
+  }
+
+  static Uint8List? _parseBytes(dynamic value) {
+    if (value == null || value == '') return null;
+    if (value is Uint8List) return value;
+
+    try {
+      return base64.decode(value.toString());
+    } catch (_) {
+      return null;
+    }
+  }
+
   factory EcmReportMasterModel.fromJson(Map<String, dynamic> json) {
     return EcmReportMasterModel(
-      deviceId: json["DeviceId"],
-      deviceType: json["DeviceType"],
-      checkListId: json["CheckListId"],
-      subProcessId: json["SubProcessId"],
-      processId: json["ProcessId"],
-      description: json["Description"],
-      seqNo: json["SeqNo"],
-      inputType: json["InputType"],
+      deviceId: _parseInt(json["DeviceId"]),
+      deviceType: _parseString(json["DeviceType"]),
+      checkListId: _parseInt(json["CheckListId"]),
+      subProcessId: _parseInt(json["SubProcessId"]),
+      processId: _parseInt(json["ProcessId"]),
+      description: _parseString(json["Description"]),
+      seqNo: _parseInt(json["SeqNo"]),
+      inputType: _parseString(json["InputType"]),
       inputText: json["InputText"],
-      subProcessName: json["SubProcessName"],
-      processName: json["ProcessName"],
+      subProcessName: _parseString(json["SubProcessName"]),
+      processName: _parseString(json["ProcessName"]),
       isMultiValue: json["IsMultiValue"],
       comment: json["Comment"],
       parameterName: json["ParameterName"],
@@ -188,21 +220,18 @@ class EcmReportMasterModel {
       isBulletHeader: json["IsBulletHeader"],
       subChakQty: json["SubChakQty"],
       approvedStatus: json["ApprovedStatus"],
-      workedBy: json["WorkedBy"],
-      workedOn: DateTime.tryParse(json["WorkedOn"] ?? ""),
-      remark: json["Remark"],
-      approvedBy: json["ApprovedBy"],
-      approvedOn: DateTime.tryParse(json["ApprovedOn"] ?? ""),
-      approvalRemark: json["ApprovalRemark"],
-      tempDt: DateTime.tryParse(json["TempDt"] ?? ""),
-      value: json["Value"],
-      imageByteArray:
-          json['imageByteArray'] != null && json['imageByteArray'] != ''
-          ? base64.decode(json['imageByteArray'])
-          : null,
-      image: json["image"],
-      issaved: json["issaved"],
-      projectId: json["ProjectId"],
+      workedBy: _parseInt(json["WorkedBy"]),
+      workedOn: _parseDate(json["WorkedOn"]),
+      remark: _parseString(json["Remark"]),
+      approvedBy: _parseInt(json["ApprovedBy"]),
+      approvedOn: _parseDate(json["ApprovedOn"]),
+      approvalRemark: _parseString(json["ApprovalRemark"]),
+      tempDt: _parseDate(json["TempDt"]),
+      value: _parseString(json["Value"]),
+      imageByteArray: _parseBytes(json['imageByteArray']),
+      image: json["image"] is XFile ? json["image"] : null,
+      issaved: _parseString(json["issaved"]),
+      projectId: _parseInt(json["ProjectId"]),
     );
   }
 

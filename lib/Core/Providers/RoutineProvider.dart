@@ -16,7 +16,6 @@ import '../../../Utils/Themes/color_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' hide context;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
@@ -330,6 +329,9 @@ class RoutineProvider extends ChangeNotifier {
       // ---- Final check ----
       if (countflag == uploadflag) {
         var result = await uploadRoutineReport(data);
+        if (result) {
+          await savePendingCameraImagesToGallery(imageList.map((e) => e.image));
+        }
         return result;
       } else {
         return false;
@@ -621,12 +623,12 @@ class RoutineProvider extends ChangeNotifier {
       final tempDir = await getTemporaryDirectory();
       final watermarkedFile = File('${tempDir.path}/${imgPicker.name}');
       await watermarkedFile.writeAsBytes(watermarkedBytes);
-
-      final externalDir = await getExternalStorageDirectory();
-      final fileName = basename(watermarkedFile.path);
-      await imgPicker.saveTo('${externalDir!.path}/$fileName');
+      if (media == ImageSource.camera) {
+        await markCameraImageForGallery(watermarkedFile.path);
+      }
 
       // update checklist item with image
+      await unmarkCameraImageForGallery(imageItem.image?.path);
       updateChecklistItem(
         imageItem,
         watermarkedBytes,
@@ -652,6 +654,7 @@ class RoutineProvider extends ChangeNotifier {
   }
 
   void deleteImage(RoutineReportModel model) {
+    unmarkCameraImageForGallery(model.image?.path);
     model.image = null;
     model.imageByteArray = null;
     model.value = null;

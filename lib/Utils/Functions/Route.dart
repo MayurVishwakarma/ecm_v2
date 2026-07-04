@@ -20,7 +20,7 @@ import '../../Screens/ENC/OfflineDevices/Offline_lora.dart';
 import '../../Screens/ENC/OfflineDevices/Offline_oms.dart';
 import '../../Screens/ENC/OfflineDevices/Offline_rms.dart';
 import '../../../Screens/ENC/Report-History/ReportHistory.dart';
-import '../../../Screens/ENC/Reports/ECMReport.dart';
+// import '../../../Screens/ENC/Reports/ECMReport.dart';
 import '../../../Screens/ENC/Reports/OfflineECMReport.dart';
 import '../../../Screens/ENC/Reports/OneECMReport.dart';
 import '../../../Screens/RoutineCheck/Reports/RoutineReport.dart';
@@ -41,8 +41,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => EcmToolScreen());
       case LoginScreen.routeName:
         return MaterialPageRoute(builder: (context) => const LoginScreen());
-      case EcmReports.routeName:
-        return MaterialPageRoute(builder: (context) => const EcmReports());
+      // case EcmReports.routeName:
+      //   return MaterialPageRoute(builder: (context) => const EcmReports());
       case Setting.routeName:
         return MaterialPageRoute(builder: (context) => const Setting());
       case TermsAndConditionsPage.routeName:

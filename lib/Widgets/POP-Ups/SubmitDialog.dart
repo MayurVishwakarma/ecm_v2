@@ -132,7 +132,7 @@ Future<void> showSubmitDialog(
               siteEngineerTeamController.clear();
               Navigator.of(dialogCtx).pop(); // Close dialog first
               final isSuccess = await ep.insertCheckList(
-                ep.checklistModel!,
+                data,
                 remark,
                 siteTeam,
                 context,
@@ -278,7 +278,7 @@ Future<void> showOfflineSubmitDialog(
               siteEngineerTeamController.clear();
 
               final isSuccess = await ep.addNew(
-                ep.checklistModel!,
+                data,
                 remark,
                 ap.selectedProject!.id!,
               );

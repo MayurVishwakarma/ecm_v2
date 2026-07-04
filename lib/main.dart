@@ -48,6 +48,7 @@ class _MyAppState extends State<MyApp> {
     // Example: request multiple permissions
     Map<Permission, PermissionStatus> statuses = await [
       Permission.camera,
+      Permission.photos,
       Permission.storage,
       Permission.locationWhenInUse,
     ].request();
@@ -56,7 +57,8 @@ class _MyAppState extends State<MyApp> {
     if (statuses[Permission.camera]!.isDenied) {
       debugPrint("Camera permission denied");
     }
-    if (statuses[Permission.storage]!.isPermanentlyDenied) {
+    if (statuses[Permission.storage]!.isPermanentlyDenied ||
+        (statuses[Permission.photos]?.isPermanentlyDenied ?? false)) {
       // 🚨 Show dialog asking user to open settings
       await openAppSettings();
     }
